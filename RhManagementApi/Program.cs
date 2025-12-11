@@ -7,11 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AdventureWorksContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks"), sql => sql.UseHierarchyId()).LogTo(Console.WriteLine, LogLevel.Information));
 
 var app = builder.Build();
+
+app.MapControllers();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
