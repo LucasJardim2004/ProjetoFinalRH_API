@@ -77,18 +77,11 @@ public partial class AdventureWorksContext : DbContext
 
             entity.HasKey(e => new { e.BusinessEntityID, e.StartDate, e.DepartmentID, e.ShiftID });
 
-            entity.HasOne(d => d.BusinessEntity)
-                  .WithMany(p => p.EmployeeDepartmentHistories)
-                  .HasForeignKey(d => d.BusinessEntityID)
-                  .OnDelete(DeleteBehavior.ClientSetNull);
-
             entity.HasOne(d => d.Department)
                   .WithMany(p => p.EmployeeDepartmentHistories)
                   .HasForeignKey(d => d.DepartmentID)
                   .OnDelete(DeleteBehavior.ClientSetNull);
         });
-
-
 
         modelBuilder.Entity<EmployeePayHistory>(entity =>
         {
@@ -96,13 +89,12 @@ public partial class AdventureWorksContext : DbContext
 
             entity.HasKey(e => new { e.BusinessEntityID, e.RateChangeDate });
 
-            entity.HasOne(d => d.BusinessEntity)
-                  .WithMany(p => p.EmployeePayHistories)
-                  .HasForeignKey(d => d.BusinessEntityID)
-                  .OnDelete(DeleteBehavior.ClientSetNull);
+            entity.HasOne(eph => eph.Employee)
+                          .WithMany(e => e.EmployeePayHistories)
+                          .HasForeignKey(eph => eph.BusinessEntityID)
+                          .HasPrincipalKey(e => e.BusinessEntityID);
+
         });
-
-
 
         modelBuilder.Entity<JobCandidate>(entity =>
         {

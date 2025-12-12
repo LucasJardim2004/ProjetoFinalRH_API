@@ -12,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AdventureWorksContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks"), sql => sql.UseHierarchyId()).LogTo(Console.WriteLine, LogLevel.Information));
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 app.MapControllers();

@@ -18,6 +18,18 @@ public partial class CandidateInfo
 
     public string Gender { get; set; } = null!;
 
+    public string FirstName {get;set;} = null!;
+
+    public string MiddleName {get;set;} = null!;
+
+    public string LastName {get;set;} = null!;
+
+    public string Email {get;set;} = null!;
+
+    public string PhoneNumber {get;set;} = null!;
+
+    public string Comment {get;set;} = null!;
+
     public virtual JobCandidate JobCandidate { get; set; } = null!;
 
     public virtual Opening Opening { get; set; } = null!;

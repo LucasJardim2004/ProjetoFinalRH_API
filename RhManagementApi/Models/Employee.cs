@@ -104,9 +104,9 @@ namespace RhManagementApi.Models
 
         // ----- Collections (as per AdventureWorks relationships) -----
 
-        public virtual ICollection<EmployeeDepartmentHistory> EmployeeDepartmentHistories { get; set; } = new List<EmployeeDepartmentHistory>();
-        public virtual ICollection<EmployeePayHistory> EmployeePayHistories { get; set; } = new List<EmployeePayHistory>();
-        public virtual ICollection<JobCandidate> JobCandidates { get; set; } = new List<JobCandidate>();
-        public virtual ICollection<Login> Logins { get; set; } = new List<Login>();
+        public ICollection<EmployeeDepartmentHistory> EmployeeDepartmentHistories { get; set; } = new List<EmployeeDepartmentHistory>();
+        public ICollection<EmployeePayHistory> EmployeePayHistories { get; set; } = new List<EmployeePayHistory>();
+        public ICollection<JobCandidate> JobCandidates { get; set; } = new List<JobCandidate>();
+        public ICollection<Login> Logins { get; set; } = new List<Login>();
     }
 }

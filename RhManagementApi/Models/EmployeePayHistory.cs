@@ -30,5 +30,5 @@ public partial class EmployeePayHistory
     /// </summary>
     public DateTime ModifiedDate { get; set; }
 
-    public virtual Employee BusinessEntity { get; set; } = null!;
+    public Employee? Employee { get; set; }
 }
