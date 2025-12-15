@@ -14,7 +14,7 @@ namespace RhManagementApi.DTOs
 
         public string NationalID { get; set; } = null!;
 
-        public DateOnly BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public string MaritalStatus { get; set; } = null!;
 

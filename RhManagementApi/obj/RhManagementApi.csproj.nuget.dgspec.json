@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj": {}
+    "C:\\Users\\maencarn\\RH_Proj\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj": {
+    "C:\\Users\\maencarn\\RH_Proj\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj",
+        "projectUniqueName": "C:\\Users\\maencarn\\RH_Proj\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj",
         "projectName": "RhManagementApi",
-        "projectPath": "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj",
-        "packagesPath": "C:\\Users\\rodrmart\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\obj\\",
+        "projectPath": "C:\\Users\\maencarn\\RH_Proj\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj",
+        "packagesPath": "C:\\Users\\maencarn\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maencarn\\RH_Proj\\ProjetoFinalRH\\RhManagementApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\rodrmart\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\maencarn\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"

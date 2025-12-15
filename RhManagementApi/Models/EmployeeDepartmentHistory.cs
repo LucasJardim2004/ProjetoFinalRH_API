@@ -23,17 +23,12 @@ public partial class EmployeeDepartmentHistory
     /// <summary>
     /// Date the employee started work in the department.
     /// </summary>
-    public DateOnly StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
     /// <summary>
     /// Date the employee left the department. NULL = Current department.
     /// </summary>
-    public DateOnly? EndDate { get; set; }
-
-    /// <summary>
-    /// Date and time the record was last updated.
-    /// </summary>
-    public DateTime ModifiedDate { get; set; }
+    public DateTime? EndDate { get; set; }
 
     public virtual Department Department { get; set; } = null!;
 }

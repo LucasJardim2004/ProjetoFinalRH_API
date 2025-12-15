@@ -22,28 +22,29 @@ public partial class AdventureWorksContext : DbContext
 
     public virtual DbSet<JobCandidate> JobCandidates { get; set; }
 
-    public virtual DbSet<Login> Logins { get; set; }
-
     public virtual DbSet<Opening> Openings { get; set; }
 
     public virtual DbSet<Person> People { get; set; }
 
+    public virtual DbSet<PersonEmailAddress> EmailAddresses {get;set;}
+
+    public virtual DbSet<PersonPhone> PeoplePhones {get;set;}
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CandidateInfo>(entity =>
-        {
-            entity.HasNoKey();
+        {   
             entity.ToTable("CandidateInfo", "HumanResources");
 
+            entity.HasKey(e => e.ID);  // or the correct key column(s)
+
             entity.HasOne(d => d.JobCandidate)
-                  .WithMany()
-                  .HasForeignKey(d => d.JobCandidateID)
-                  .OnDelete(DeleteBehavior.ClientSetNull);
+                .WithMany()
+                .HasForeignKey(d => d.JobCandidateID);
 
             entity.HasOne(d => d.Opening)
-                  .WithMany()
-                  .HasForeignKey(d => d.OpeningID)
-                  .OnDelete(DeleteBehavior.ClientSetNull);
+                .WithMany()
+                .HasForeignKey(d => d.OpeningID);
         });
 
         modelBuilder.Entity<Department>(entity =>
@@ -108,30 +109,12 @@ public partial class AdventureWorksContext : DbContext
         });
 
 
-
-        modelBuilder.Entity<Login>(entity =>
-        {
-            entity.ToTable("Login", "HumanResources");
-
-            entity.HasKey(e => e.ID);
-
-            entity.HasOne(d => d.LoginNavigation)
-                  .WithMany(p => p.Logins)
-                  .HasPrincipalKey(p => p.LoginID)
-                  .HasForeignKey(d => d.LoginID)
-                  .OnDelete(DeleteBehavior.ClientSetNull);
-        });
-
-
-
         modelBuilder.Entity<Opening>(entity =>
         {
             entity.ToTable("Opening", "HumanResources");
 
             entity.HasKey(e => e.OpeningID);
         });
-
-
 
         modelBuilder.Entity<Person>(entity =>
         {
@@ -142,5 +125,22 @@ public partial class AdventureWorksContext : DbContext
             entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
         });
 
+        modelBuilder.Entity<PersonEmailAddress> (entity =>
+        {
+            entity.ToTable("Person", "EmailAddress");
+
+            entity.HasKey(e => e.BusinessEntityID);
+
+            entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<PersonPhone> (entity =>
+        {
+            entity.ToTable("Person", "Phone");
+
+            entity.HasKey(e => e.BusinessEntityID);
+
+            entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
+        });
     }
 }

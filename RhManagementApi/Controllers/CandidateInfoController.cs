@@ -13,7 +13,7 @@ namespace RhManagementApi.Controllers
     {
         private readonly AdventureWorksContext db;
         private readonly IMapper mapper;
-        public OpeningController(AdventureWorksContext db, IMapper mapper)
+        public CandidateInfoController(AdventureWorksContext db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
@@ -33,7 +33,7 @@ namespace RhManagementApi.Controllers
         {
             var candidate = await this.db.CandidateInfos
                 .FirstOrDefaultAsync(o => o.JobCandidateID == id);
-            if (opening == null) return NotFound();
+            if (candidate == null) return NotFound();
 
             var candidateDTO = this.mapper.Map<CandidateInfoDTO>(candidate);
 
@@ -51,29 +51,34 @@ namespace RhManagementApi.Controllers
             return CreatedAtAction(nameof(Get),new {Id = candidate.JobCandidateID}, readCandidateDTO);
         }
 
+        
         [HttpPatch("{id}")]
-        public async Task<IActionResult> Patch(int id, CandidateInfoDTO candidateDTO)
+        public async Task<IActionResult> Patch(int id, CandidateInfoDTO candidateDto)
         {
-            if (id != candidateDTO.JobCandidateID) return BadRequest();
+            if (id != candidateDto.JobCandidateID) return BadRequest();
 
-            var candidate = await this.db.CandidateInfos
+            var candidate = await db.CandidateInfos
                 .FirstOrDefaultAsync(e => e.JobCandidateID == id);
 
             if (candidate == null) return NotFound();
 
-            if (candidateDTO.JobTitle != null) candidate.JobTitle = candidateDTO.JobTitle;
-            if (candidateDTO.NationalID != null) candidate.NationalID = candidateDTO.NationalID;
-            if (candidateDTO.BirthDate.HasValue) candidate.BirthDate = candidateDTO.BirthDate.Value;
-            if (candidateDTO.MaritalStatus != null) candidate.MaritalStatus = candidateDTO.MaritalStatus;
-            if (candidateDTO.Gender != null) candidate.Gender = candidateDTO.Gender;
-            if (candidateDTO.FirstName != null) candidate.FirstName = candidateDTO.FirstName;
-            if (candidateDTO.MiddleName != null) candidate.MiddleName = candidateDTO.MiddleName;
-            if (candidateDTO.LastName != null) candidate.LastName = candidateDTO.LastName;
-            if (candidateDTO.Email != null) candidate.Email = candidateDTO.Email;
-            if (candidateDTO.Comment != null) candidate.Comment = candidateDTO.Comment;
+            if (!string.IsNullOrEmpty(candidateDto.JobTitle)) candidate.JobTitle = candidateDto.JobTitle;
+            if (!string.IsNullOrEmpty(candidateDto.NationalID)) candidate.NationalID = candidateDto.NationalID;
 
-            await this.db.SaveChangesAsync();
-            return Ok(this.mapper.Map<candidateDTO>(candidate));
+            // DateTime? => HasValue & Value are valid
+            if (candidateDto.BirthDate.HasValue) candidate.BirthDate = candidateDto.BirthDate.Value;
+
+            if (!string.IsNullOrEmpty(candidateDto.MaritalStatus)) candidate.MaritalStatus = candidateDto.MaritalStatus;
+            if (!string.IsNullOrEmpty(candidateDto.Gender)) candidate.Gender = candidateDto.Gender;
+            if (!string.IsNullOrEmpty(candidateDto.FirstName)) candidate.FirstName = candidateDto.FirstName;
+            if (!string.IsNullOrEmpty(candidateDto.MiddleName)) candidate.MiddleName = candidateDto.MiddleName;
+            if (!string.IsNullOrEmpty(candidateDto.LastName)) candidate.LastName = candidateDto.LastName;
+            if (!string.IsNullOrEmpty(candidateDto.Email)) candidate.Email = candidateDto.Email;
+            if (!string.IsNullOrEmpty(candidateDto.Comment)) candidate.Comment = candidateDto.Comment;
+
+            await db.SaveChangesAsync();
+            return Ok(mapper.Map<CandidateInfoDTO>(candidate));
+
         }
 
         [HttpDelete("{id}")]

@@ -54,10 +54,10 @@ namespace RhManagementApi.Controllers
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch(int id, OpeningDTO openingDTO)
         {
-            if (id != openingDTO.BusinessEntityID) return BadRequest();
+            if (id != openingDTO.OpeningID) return BadRequest();
 
             var opening = await this.db.Openings
-                .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
+                .FirstOrDefaultAsync(e => e.OpeningID == id);
 
             if (opening == null) return NotFound();
 

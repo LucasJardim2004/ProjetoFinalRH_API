@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RhManagementApi.DTOs
 {
-    public class PersonEmailAdressDTO
+    public class PersonEmailAddressDTO
     {
         [Key]
         public int BusinessEntityID {get;set;}

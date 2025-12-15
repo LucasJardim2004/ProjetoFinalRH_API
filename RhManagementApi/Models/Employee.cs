@@ -51,7 +51,7 @@ namespace RhManagementApi.Models
         /// <summary>
         /// Date of birth.
         /// </summary>
-        public DateOnly BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         /// <summary>
         /// M = Married, S = Single.
@@ -70,7 +70,7 @@ namespace RhManagementApi.Models
         /// <summary>
         /// Employee hired on this date.
         /// </summary>
-        public DateOnly HireDate { get; set; }
+        public DateTime HireDate { get; set; }
 
         /// <summary>
         /// Job classification. 0 = Hourly; 1 = Salaried.
@@ -107,6 +107,5 @@ namespace RhManagementApi.Models
         public ICollection<EmployeeDepartmentHistory> EmployeeDepartmentHistories { get; set; } = new List<EmployeeDepartmentHistory>();
         public ICollection<EmployeePayHistory> EmployeePayHistories { get; set; } = new List<EmployeePayHistory>();
         public ICollection<JobCandidate> JobCandidates { get; set; } = new List<JobCandidate>();
-        public ICollection<Login> Logins { get; set; } = new List<Login>();
     }
 }

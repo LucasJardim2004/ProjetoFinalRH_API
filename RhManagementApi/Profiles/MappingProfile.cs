@@ -14,11 +14,10 @@ namespace Livraria.Profiles
             CreateMap<EmployeeDepartmentHistory, EmployeeDepartmentHistoryDTO>().ReverseMap();
             CreateMap<EmployeePayHistory, EmployeePayHistoryDTO>().ReverseMap();
             CreateMap<JobCandidate, JobCandidateDTO>().ReverseMap();
-            CreateMap<Login, LoginDTO>().ReverseMap();
             CreateMap<Opening, OpeningDTO>().ReverseMap();
             CreateMap<Person, PersonDTO>().ReverseMap();
             CreateMap<PersonPhone,PersonPhoneDTO>().ReverseMap();
-            CreateMap<PersonEmailAdresses, PersonEmailAdressesDTO>().ReverseMap();
+            CreateMap<PersonEmailAddress, PersonEmailAddressDTO>().ReverseMap();
         }
     }
 }

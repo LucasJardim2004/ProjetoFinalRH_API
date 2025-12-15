@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RhManagementApi.Models
 {
-    public class PersonEmailAdress
+    public class PersonEmailAddress
     {
         [Key]
         public int BusinessEntityID {get;set;}
@@ -16,7 +16,6 @@ namespace RhManagementApi.Models
 
         [Required]
         public DateTime ModifiedDate {get;set;}
-
 
     }
 }

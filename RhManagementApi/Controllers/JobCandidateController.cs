@@ -33,7 +33,7 @@ namespace RhManagementApi.Controllers
         {
             var candidate = await this.db.JobCandidates
                 .FirstOrDefaultAsync(o => o.JobCandidateID == id);
-            if (opening == null) return NotFound();
+            if (candidate == null) return NotFound();
 
             var candidateDTO = this.mapper.Map<JobCandidateDTO>(candidate);
 
@@ -74,7 +74,7 @@ namespace RhManagementApi.Controllers
             var candidate = await this.db.JobCandidates.FindAsync(id);
             if (candidate == null) return NotFound();
 
-            this.db.CandidateInfos.Remove(candidate);
+            this.db.JobCandidates.Remove(candidate);
             await this.db.SaveChangesAsync();
 
             return NoContent();

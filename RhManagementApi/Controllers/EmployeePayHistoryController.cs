@@ -52,7 +52,8 @@ namespace RhManagementApi.Controllers
 
             if (employeePayHistory == null) return NotFound();
 
-            if (employeePayHistoryDTO.EndDate != null) employeePayHistory.EndDate = employeePayHistoryDTO.EndDate;
+            if (employeePayHistoryDTO.Rate != null) employeePayHistory.Rate = employeePayHistoryDTO.Rate;
+            if (employeePayHistoryDTO.PayFrequency != null) employeePayHistory.PayFrequency = employeePayHistoryDTO.PayFrequency;
 
             await this.db.SaveChangesAsync();
             return Ok(this.mapper.Map<EmployeePayHistoryDTO>(employeePayHistory));

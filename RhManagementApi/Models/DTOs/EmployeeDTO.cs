@@ -25,7 +25,7 @@ namespace RhManagementApi.DTOs
         /// <summary>
         /// Date of birth.
         /// </summary>
-        public DateOnly? BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public short? OrganizationLevel { get; set; }
 
@@ -42,7 +42,7 @@ namespace RhManagementApi.DTOs
         /// <summary>
         /// Employee hired on this date.
         /// </summary>
-        public DateOnly? HireDate { get; set; }
+        public DateTime? HireDate { get; set; }
 
         public List<EmployeeDepartmentHistoryDTO> EmployeeDepartmentHistories { get; set; } = new List<EmployeeDepartmentHistoryDTO>();
         public List<EmployeePayHistoryDTO> EmployeePayHistories { get; set; } = new List<EmployeePayHistoryDTO>();

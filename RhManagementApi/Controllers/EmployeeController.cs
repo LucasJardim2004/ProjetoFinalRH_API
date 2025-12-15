@@ -23,6 +23,7 @@ namespace RhManagementApi.Controllers
         public async Task<IActionResult> GetAll()
         {
             var employee = await this.db.Employees
+                .Take(10)
                 .ToListAsync();
 
             return Ok(employee);

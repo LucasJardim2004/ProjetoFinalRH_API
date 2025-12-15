@@ -22,7 +22,7 @@ namespace RhManagementApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get (int id)
         {
-            var phone = await this.db.Phones
+            var phone = await this.db.PeoplePhones
                 .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
             if (phone == null) return NotFound();
 
@@ -35,7 +35,7 @@ namespace RhManagementApi.Controllers
         public async Task<IActionResult> Create(PersonPhoneDTO phoneDTO)
         {
             var phone = this.mapper.Map<PersonPhone>(phoneDTO);
-            this.db.Phones.Add(phone);
+            this.db.PeoplePhones.Add(phone);
             await this.db.SaveChangesAsync();
 
             var readPhoneDTO = this.mapper.Map<PersonPhoneDTO>(phone);
@@ -47,7 +47,7 @@ namespace RhManagementApi.Controllers
         {
             if (id != phoneDTO.BusinessEntityID) return BadRequest();
 
-            var phone = await this.db.Phones
+            var phone = await this.db.PeoplePhones
                 .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
 
             if (phone == null) return NotFound();
