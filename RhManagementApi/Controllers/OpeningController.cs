@@ -52,24 +52,34 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> Patch(int id, EmployeeDTO employeeDTO)
+        public async Task<IActionResult> Patch(int id, OpeningDTO openingDTO)
         {
-            if (id != employeeDTO.BusinessEntityID) return BadRequest();
+            if (id != openingDTO.BusinessEntityID) return BadRequest();
 
-            var employee = await this.db.Employees.Include(e => e.EmployeeDepartmentHistories).Include(e => e.EmployeePayHistories)
+            var opening = await this.db.Openings
                 .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
 
-            if (employee == null) return NotFound();
+            if (opening == null) return NotFound();
 
-            if (employeeDTO.JobTitle != null) employee.JobTitle = employeeDTO.JobTitle;
-            if (employeeDTO.BirthDate.HasValue) employee.BirthDate = employeeDTO.BirthDate.Value;
-            if (employeeDTO.Gender != null) employee.Gender = employeeDTO.Gender;
-            if (employeeDTO.MaritalStatus != null) employee.MaritalStatus = employeeDTO.MaritalStatus;
-            if (employeeDTO.OrganizationLevel != null) employee.OrganizationLevel = employeeDTO.OrganizationLevel;
-            if (employeeDTO.HireDate.HasValue) employee.HireDate = employeeDTO.HireDate.Value;
+            if (openingDTO.JobTitle != null) opening.JobTitle = openingDTO.JobTitle;
+            if (openingDTO.Description != null) opening.Description = openingDTO.Description;
+            if (openingDTO.DateCreated != null) opening.DateCreated = openingDTO.DateCreated;
+            if (openingDTO.OpenFlag != null) opening.OpenFlag = openingDTO.OpenFlag;
 
             await this.db.SaveChangesAsync();
-            return Ok(this.mapper.Map<EmployeeDTO>(employee));
+            return Ok(this.mapper.Map<OpeningDTO>(opening));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete (int id)
+        {
+            var opening = await this.db.Openings.FindAsync(id);
+            if (opening == null) return NotFound();
+
+            this.db.Openings.Remove(opening);
+            await this.db.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

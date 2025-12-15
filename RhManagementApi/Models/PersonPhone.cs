@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RhManagementApi.Models
 {
-    public class PeoplePhones
+    public class PersonPhone
     {
         [Key]
         public int BusinessEntityID {get;set;}

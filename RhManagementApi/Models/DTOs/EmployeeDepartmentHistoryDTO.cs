@@ -24,11 +24,6 @@ namespace RhManagementApi.DTOs
         /// </summary>
         public DateOnly? EndDate { get; set; }
 
-        /// <summary>
-        /// Date and time the record was last updated.
-        /// </summary>
-        public DateTime ModifiedDate { get; set; }
-
         public virtual Department Department { get; set; } = null!;
     }
 }

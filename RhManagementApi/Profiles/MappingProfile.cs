@@ -17,6 +17,8 @@ namespace Livraria.Profiles
             CreateMap<Login, LoginDTO>().ReverseMap();
             CreateMap<Opening, OpeningDTO>().ReverseMap();
             CreateMap<Person, PersonDTO>().ReverseMap();
+            CreateMap<PersonPhone,PersonPhoneDTO>().ReverseMap();
+            CreateMap<PersonEmailAdresses, PersonEmailAdressesDTO>().ReverseMap();
         }
     }
 }

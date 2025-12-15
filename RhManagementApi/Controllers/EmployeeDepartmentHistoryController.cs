@@ -53,8 +53,7 @@ namespace RhManagementApi.Controllers
 
             if (employeeDepartmentHistory == null) return NotFound();
 
-            if (employeeDepartmentHistory.EndDate != null) employeeDepartmentHistory.EndDate = employeeDepartmentHistoryDTO.EndDate;
-            employeeDepartmentHistory.ModifiedDate = DateTime.Now;
+            if (employeeDepartmentHistoryDTO.EndDate != null) employeeDepartmentHistory.EndDate = employeeDepartmentHistoryDTO.EndDate;
 
             await this.db.SaveChangesAsync();
             return Ok(this.mapper.Map<EmployeeDepartmentHistoryDTO>(employeeDepartmentHistory));
