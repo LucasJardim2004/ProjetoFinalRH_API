@@ -54,7 +54,7 @@ namespace RhManagementApi.Controllers
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch(int id, JobCandidate candidateDTO)
         {
-            if (id != candidateDTO.JobCandidateID) return BadRequest();
+            if (id != candidateDTO.JobCandidateID) return BadRequest(); // TODO: VERIFICAR SE ESTA BEM
 
             var candidate = await this.db.JobCandidates
                 .FirstOrDefaultAsync(e => e.JobCandidateID == id);

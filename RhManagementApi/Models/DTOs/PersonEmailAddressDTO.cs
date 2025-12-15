@@ -5,10 +5,10 @@ namespace RhManagementApi.DTOs
 {
     public class PersonEmailAddressDTO
     {
-        [Key]
-        public int BusinessEntityID {get;set;}
+        public int? BusinessEntityID {get;set;}
+
+        public int? EmailAddressID {get;set;}
         
-        [Required]
-        public string EmailAddress {get;set;}
+        public string? EmailAddress {get;set;}
     }
 }

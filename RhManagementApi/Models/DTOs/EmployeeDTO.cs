@@ -10,17 +10,17 @@ namespace RhManagementApi.DTOs
         /// <summary>
         /// Primary key for Employee records. Foreign key to Person.BusinessEntityID.
         /// </summary>
-        public int BusinessEntityID { get; set; }
+        public int? BusinessEntityID { get; set; }
 
         /// <summary>
         /// Unique national identification number such as a social security number.
         /// </summary>
-        public string NationalIDNumber { get; set; } = null!;
+        public string? NationalIDNumber { get; set; } = null!;
 
         /// <summary>
         /// Work title such as Buyer or Sales Representative.
         /// </summary>
-        public string JobTitle { get; set; } = null!;
+        public string? JobTitle { get; set; } = null!;
 
         /// <summary>
         /// Date of birth.
@@ -32,12 +32,12 @@ namespace RhManagementApi.DTOs
         /// <summary>
         /// M = Married, S = Single.
         /// </summary>
-        public string MaritalStatus { get; set; } = null!;
+        public string? MaritalStatus { get; set; } = null!;
 
         /// <summary>
         /// M = Male, F = Female.
         /// </summary>
-        public string Gender { get; set; } = null!;
+        public string? Gender { get; set; } = null!;
 
         /// <summary>
         /// Employee hired on this date.

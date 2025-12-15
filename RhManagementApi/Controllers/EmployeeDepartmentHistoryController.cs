@@ -22,11 +22,10 @@ namespace RhManagementApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get (int id)
         {
-            var employeeDepartmentHistories = await this.db.EmployeeDepartmentHistories
-                .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
+            var employeeDepartmentHistories = await this.db.EmployeeDepartmentHistories.Where(e => e.BusinessEntityID == id).ToListAsync();
             if (employeeDepartmentHistories == null) return NotFound();
 
-            var EmployeeDepartmentHistoriesDTO = this.mapper.Map<EmployeeDTO>(employeeDepartmentHistories);
+            var EmployeeDepartmentHistoriesDTO = this.mapper.Map<List<EmployeeDepartmentHistoryDTO>>(employeeDepartmentHistories);
 
             return Ok(EmployeeDepartmentHistoriesDTO);
         }
@@ -42,14 +41,14 @@ namespace RhManagementApi.Controllers
             return CreatedAtAction(nameof(Get),new {Id = employeeDepartmentHistory.BusinessEntityID}, readEmployeeDepartmentHistoryDTO);
         }
 
-
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> Patch(int id, EmployeeDepartmentHistoryDTO employeeDepartmentHistoryDTO)
+        // TODO: TORNAR BONITO
+        [HttpPatch("{id}_{startDate}")]
+        public async Task<IActionResult> Patch(int id, DateTime startDate, EmployeeDepartmentHistoryDTO employeeDepartmentHistoryDTO)
         {
             if (id != employeeDepartmentHistoryDTO.BusinessEntityID) return BadRequest();
 
             var employeeDepartmentHistory = await this.db.EmployeeDepartmentHistories
-                .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
+                .FirstOrDefaultAsync(e => e.BusinessEntityID == id && e.StartDate == startDate);
 
             if (employeeDepartmentHistory == null) return NotFound();
 

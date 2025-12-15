@@ -10,13 +10,15 @@ namespace Livraria.Profiles
         {
             CreateMap<CandidateInfo, CandidateInfoDTO>().ReverseMap();
             CreateMap<Department, DepartmentDTO>().ReverseMap();
-            CreateMap<Employee, EmployeeDTO>().ReverseMap();
+            CreateMap<Employee, EmployeeDTO>().ReverseMap()
+                .ForMember(d => d.EmployeeDepartmentHistories, opt => opt.Ignore())
+                .ForMember(d => d.EmployeePayHistories, opt => opt.Ignore());
             CreateMap<EmployeeDepartmentHistory, EmployeeDepartmentHistoryDTO>().ReverseMap();
             CreateMap<EmployeePayHistory, EmployeePayHistoryDTO>().ReverseMap();
             CreateMap<JobCandidate, JobCandidateDTO>().ReverseMap();
             CreateMap<Opening, OpeningDTO>().ReverseMap();
             CreateMap<Person, PersonDTO>().ReverseMap();
-            CreateMap<PersonPhone,PersonPhoneDTO>().ReverseMap();
+            CreateMap<PersonPhone, PersonPhoneDTO>().ReverseMap();
             CreateMap<PersonEmailAddress, PersonEmailAddressDTO>().ReverseMap();
         }
     }

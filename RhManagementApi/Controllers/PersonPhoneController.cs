@@ -39,23 +39,24 @@ namespace RhManagementApi.Controllers
             await this.db.SaveChangesAsync();
 
             var readPhoneDTO = this.mapper.Map<PersonPhoneDTO>(phone);
-            return CreatedAtAction(nameof(Get),new {Id = person.BusinessEntityID}, readPhoneDTO);
+            return CreatedAtAction(nameof(Get),new {Id = phone.BusinessEntityID}, readPhoneDTO);
         }
 
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> Patch(int id, PersonPhoneDTO phoneDTO)
-        {
-            if (id != phoneDTO.BusinessEntityID) return BadRequest();
+        // TODO: NUMERO DE TELEFONE E UMA KEY, NAO PODE SER ALTERADO 
+        // [HttpPatch("{id}")]
+        // public async Task<IActionResult> Patch(int id, PersonPhoneDTO phoneDTO)
+        // {
+        //     if (id != phoneDTO.BusinessEntityID) return BadRequest();
 
-            var phone = await this.db.PeoplePhones
-                .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
+        //     var phone = await this.db.PeoplePhones
+        //         .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
 
-            if (phone == null) return NotFound();
+        //     if (phone == null) return NotFound();
 
-            if (phoneDTO.PhoneNumber != null) phone.PhoneNumber = phoneDTO.PhoneNumber;
+        //     if (!string.IsNullOrEmpty(phoneDTO.PhoneNumber)) phone.PhoneNumber = phoneDTO.PhoneNumber;
 
-            await this.db.SaveChangesAsync();
-            return Ok(this.mapper.Map<PersonPhoneDTO>(phone));
-        }
+        //     await this.db.SaveChangesAsync();
+        //     return Ok(this.mapper.Map<PersonPhoneDTO>(phone));
+        // }
     }
 }

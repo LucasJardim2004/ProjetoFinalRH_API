@@ -22,15 +22,8 @@ namespace RhManagementApi.Models
         /// </summary>
         [Required]
         [MaxLength(15)]
-        public string NationalIDNumber { get; set; } = null!
-
-;        /// <summary>
-        /// Network login.
-        /// </summary>
-        [Required]
-        [MaxLength(256)]
-        public string LoginID { get; set; } = null!;
-
+        public string NationalIDNumber { get; set; } = null!;
+        
         /// <summary>
         /// Where the employee is located in corporate hierarchy (SQL hierarchyid).
         /// </summary>
@@ -51,7 +44,7 @@ namespace RhManagementApi.Models
         /// <summary>
         /// Date of birth.
         /// </summary>
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         /// <summary>
         /// M = Married, S = Single.
@@ -70,7 +63,7 @@ namespace RhManagementApi.Models
         /// <summary>
         /// Employee hired on this date.
         /// </summary>
-        public DateTime HireDate { get; set; }
+        public DateTime? HireDate { get; set; }
 
         /// <summary>
         /// Job classification. 0 = Hourly; 1 = Salaried.
@@ -92,20 +85,10 @@ namespace RhManagementApi.Models
         /// </summary>
         public bool CurrentFlag { get; set; }
 
-        /// <summary>
-        /// ROWGUIDCOL number uniquely identifying the record.
-        /// </summary>
-        public Guid rowguid { get; set; }
-
-        /// <summary>
-        /// Date and time the record was last updated.
-        /// </summary>
-        public DateTime ModifiedDate { get; set; }
-
         // ----- Collections (as per AdventureWorks relationships) -----
 
         public ICollection<EmployeeDepartmentHistory> EmployeeDepartmentHistories { get; set; } = new List<EmployeeDepartmentHistory>();
         public ICollection<EmployeePayHistory> EmployeePayHistories { get; set; } = new List<EmployeePayHistory>();
-        public ICollection<JobCandidate> JobCandidates { get; set; } = new List<JobCandidate>();
+        
     }
 }

@@ -43,7 +43,12 @@ namespace RhManagementApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(OpeningDTO openingDTO)
         {
+
+            if(openingDTO.DateCreated == null)
+                openingDTO.DateCreated = DateTime.Now;
+
             var opening = this.mapper.Map<Opening>(openingDTO);
+
             this.db.Openings.Add(opening);
             await this.db.SaveChangesAsync();
 
@@ -63,7 +68,7 @@ namespace RhManagementApi.Controllers
 
             if (openingDTO.JobTitle != null) opening.JobTitle = openingDTO.JobTitle;
             if (openingDTO.Description != null) opening.Description = openingDTO.Description;
-            if (openingDTO.DateCreated != null) opening.DateCreated = openingDTO.DateCreated;
+            // if (openingDTO.DateCreated != null) opening.DateCreated = openingDTO.DateCreated; TODO: VERIFICAR SE E POSSIVEL MUDAR
             if (openingDTO.OpenFlag != null) opening.OpenFlag = openingDTO.OpenFlag;
 
             await this.db.SaveChangesAsync();

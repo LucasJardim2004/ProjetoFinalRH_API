@@ -9,11 +9,9 @@ namespace RhManagementApi.Models
         public int BusinessEntityID {get;set;}
 
         [Key]
-        public int PhoneNumber {get;set;}
+        public string PhoneNumber {get;set;}
 
         [Key]
         public int PhoneNumberTypeID {get;set;}
-
-        public DateTime ModifiedDate {get;set;}
     }
 }

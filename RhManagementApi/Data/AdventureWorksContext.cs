@@ -10,6 +10,7 @@ public partial class AdventureWorksContext : DbContext
     {
     }
 
+    public virtual DbSet<BusinessEntity> BusinessEntities { get; set; }
     public virtual DbSet<CandidateInfo> CandidateInfos { get; set; }
 
     public virtual DbSet<Department> Departments { get; set; }
@@ -26,14 +27,21 @@ public partial class AdventureWorksContext : DbContext
 
     public virtual DbSet<Person> People { get; set; }
 
-    public virtual DbSet<PersonEmailAddress> EmailAddresses {get;set;}
+    public virtual DbSet<PersonEmailAddress> EmailAddresses { get; set; }
 
-    public virtual DbSet<PersonPhone> PeoplePhones {get;set;}
+    public virtual DbSet<PersonPhone> PeoplePhones { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        modelBuilder.Entity<BusinessEntity>(e =>
+        {
+            e.HasKey(x => x.BusinessEntityID);
+            e.Property(x => x.BusinessEntityID).UseIdentityColumn(); // identity
+        });
+
         modelBuilder.Entity<CandidateInfo>(entity =>
-        {   
+        {
             entity.ToTable("CandidateInfo", "HumanResources");
 
             entity.HasKey(e => e.ID);  // or the correct key column(s)
@@ -53,17 +61,15 @@ public partial class AdventureWorksContext : DbContext
             entity.HasKey(e => e.DepartmentID);
         });
 
-        modelBuilder.Entity<Person>(entity =>
-        {
-            entity.ToTable("Person", "Person");
-            entity.HasKey(p => p.BusinessEntityID);
-        });
-
         modelBuilder.Entity<Employee>(entity =>
         {
             entity.ToTable("Employee", "HumanResources");
             entity.HasKey(e => e.BusinessEntityID);
             entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
+
+
+            entity.Property(e => e.BirthDate).HasColumnType("datetime"); // ensure datetime (DB default)
+            entity.Property(e => e.HireDate).HasColumnType("datetime");  // ensure datetime
 
             entity.Property(e => e.OrganizationNode).HasColumnType("hierarchyid");
 
@@ -76,7 +82,7 @@ public partial class AdventureWorksContext : DbContext
         {
             entity.ToTable("EmployeeDepartmentHistory", "HumanResources");
 
-            entity.HasKey(e => new { e.BusinessEntityID, e.StartDate, e.DepartmentID, e.ShiftID });
+            entity.HasKey(e => new { e.BusinessEntityID, e.StartDate, e.DepartmentID });
 
             entity.HasOne(d => d.Department)
                   .WithMany(p => p.EmployeeDepartmentHistories)
@@ -103,9 +109,6 @@ public partial class AdventureWorksContext : DbContext
 
             entity.HasKey(e => e.JobCandidateID);
 
-            entity.HasOne(d => d.BusinessEntity)
-                  .WithMany(p => p.JobCandidates)
-                  .HasForeignKey(d => d.BusinessEntityID);
         });
 
 
@@ -125,20 +128,26 @@ public partial class AdventureWorksContext : DbContext
             entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
         });
 
-        modelBuilder.Entity<PersonEmailAddress> (entity =>
+        modelBuilder.Entity<PersonEmailAddress>(entity =>
         {
-            entity.ToTable("Person", "EmailAddress");
+            entity.ToTable("EmailAddress", "Person");
 
-            entity.HasKey(e => e.BusinessEntityID);
+            entity.HasKey(e => new { e.BusinessEntityID, e.EmailAddressID });
 
             entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
+
+
+            // Identity generation on EmailAddressID
+            entity.Property(e => e.EmailAddressID)
+                  .ValueGeneratedOnAdd();
+
         });
 
-        modelBuilder.Entity<PersonPhone> (entity =>
+        modelBuilder.Entity<PersonPhone>(entity =>
         {
-            entity.ToTable("Person", "Phone");
+            entity.ToTable("PersonPhone", "Person");
 
-            entity.HasKey(e => e.BusinessEntityID);
+            entity.HasKey(e => new { e.BusinessEntityID, e.PhoneNumber, e.PhoneNumberTypeID });
 
             entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
         });

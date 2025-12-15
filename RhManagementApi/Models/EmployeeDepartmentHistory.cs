@@ -16,11 +16,6 @@ public partial class EmployeeDepartmentHistory
     public short DepartmentID { get; set; }
 
     /// <summary>
-    /// Identifies which 8-hour shift the employee works. Foreign key to Shift.Shift.ID.
-    /// </summary>
-    public byte ShiftID { get; set; }
-
-    /// <summary>
     /// Date the employee started work in the department.
     /// </summary>
     public DateTime StartDate { get; set; }

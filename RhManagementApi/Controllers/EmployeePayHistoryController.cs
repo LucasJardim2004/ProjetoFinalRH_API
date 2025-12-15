@@ -22,41 +22,44 @@ namespace RhManagementApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get (int id)
         {
-            var employeePayHistory = await this.db.EmployeePayHistories
-                .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
+            var employeePayHistory = await this.db.EmployeePayHistories.Where(e => e.BusinessEntityID == id).ToListAsync();
             if (employeePayHistory == null) return NotFound();
 
-            var EmployeePayHistoryDTO = this.mapper.Map<EmployeePayHistoryDTO>(employeePayHistory);
+            var EmployeePayHistoryDTO = this.mapper.Map<List<EmployeePayHistoryDTO>>(employeePayHistory);
 
             return Ok(EmployeePayHistoryDTO);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(EmployeeDepartmentHistoryDTO employeePayHistoryDTO)
+        public async Task<IActionResult> Create(EmployeePayHistoryDTO employeePayHistoryDTO)
         {
+            if(employeePayHistoryDTO.RateChangeDate == null)
+                employeePayHistoryDTO.RateChangeDate = DateTime.Now;
+
             var employeePayHistory = this.mapper.Map<EmployeePayHistory>(employeePayHistoryDTO);
             this.db.EmployeePayHistories.Add(employeePayHistory);
             await this.db.SaveChangesAsync();
 
-            var readEmployeePayHistoryDTO = this.mapper.Map<EmployeeDepartmentHistoryDTO>(employeePayHistory);
+            var readEmployeePayHistoryDTO = this.mapper.Map<EmployeePayHistoryDTO>(employeePayHistory);
             return CreatedAtAction(nameof(Get),new {Id = employeePayHistory.BusinessEntityID}, readEmployeePayHistoryDTO);
         }
 
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> Patch(int id, EmployeePayHistoryDTO employeePayHistoryDTO)
-        {
-            if (id != employeePayHistoryDTO.BusinessEntityID) return BadRequest();
+        // TODO: VERIFICAR SE E MESMO NECESSARIO PATCH
+        // [HttpPatch("{id}")]
+        // public async Task<IActionResult> Patch(int id, EmployeePayHistoryDTO employeePayHistoryDTO)
+        // {
+        //     if (id != employeePayHistoryDTO.BusinessEntityID) return BadRequest();
 
-            var employeePayHistory = await this.db.EmployeePayHistories
-                .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
+        //     var employeePayHistory = await this.db.EmployeePayHistories
+        //         .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
 
-            if (employeePayHistory == null) return NotFound();
+        //     if (employeePayHistory == null) return NotFound();
 
-            if (employeePayHistoryDTO.Rate != null) employeePayHistory.Rate = employeePayHistoryDTO.Rate;
-            if (employeePayHistoryDTO.PayFrequency != null) employeePayHistory.PayFrequency = employeePayHistoryDTO.PayFrequency;
+        //     if (employeePayHistoryDTO.Rate != null) employeePayHistory.Rate = employeePayHistoryDTO.Rate;
+        //     if (employeePayHistoryDTO.PayFrequency != null) employeePayHistory.PayFrequency = employeePayHistoryDTO.PayFrequency;
 
-            await this.db.SaveChangesAsync();
-            return Ok(this.mapper.Map<EmployeePayHistoryDTO>(employeePayHistory));
-        }
+        //     await this.db.SaveChangesAsync();
+        //     return Ok(this.mapper.Map<EmployeePayHistoryDTO>(employeePayHistory));
+        // }
     }
 }

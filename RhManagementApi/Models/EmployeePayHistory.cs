@@ -24,11 +24,6 @@ public partial class EmployeePayHistory
     /// 1 = Salary received monthly, 2 = Salary received biweekly
     /// </summary>
     public byte PayFrequency { get; set; }
-
-    /// <summary>
-    /// Date and time the record was last updated.
-    /// </summary>
-    public DateTime ModifiedDate { get; set; }
-
+    
     public Employee? Employee { get; set; }
 }

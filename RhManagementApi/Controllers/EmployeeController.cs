@@ -30,7 +30,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get (int id)
+        public async Task<IActionResult> Get(int id)
         {
             var employee = await this.db.Employees.Include(e => e.EmployeeDepartmentHistories).Include(e => e.EmployeePayHistories)
                 .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
@@ -42,14 +42,39 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(EmployeeDTO employeeDTO)
+        public async Task<IActionResult> Create(EmployeeWithPersonDTO employeeWithPersonDTO)
         {
-            var employee = this.mapper.Map<Employee>(employeeDTO);
+
+
+            var be = new BusinessEntity();
+            db.BusinessEntities.Add(be);
+            await db.SaveChangesAsync();                 // identity generated
+            var newId = be.BusinessEntityID;
+
+
+            // 2) Person
+            var person = new Person
+            {
+                BusinessEntityID = newId,
+                PersonType = employeeWithPersonDTO.PersonType,             // e.g., "EM"
+                FirstName = employeeWithPersonDTO.FirstName,
+                LastName = employeeWithPersonDTO.LastName,
+            };
+
+            db.People.Add(person);
+            await db.SaveChangesAsync();
+
+            if (employeeWithPersonDTO.EmployeeDTO.HireDate == null)
+                employeeWithPersonDTO.EmployeeDTO.HireDate = DateTime.Now;
+
+            var employee = this.mapper.Map<Employee>(employeeWithPersonDTO.EmployeeDTO);
+            employee.BusinessEntityID = newId;
             this.db.Employees.Add(employee);
+
             await this.db.SaveChangesAsync();
 
             var readEmployeeDTO = this.mapper.Map<EmployeeDTO>(employee);
-            return CreatedAtAction(nameof(Get),new {Id = employee.BusinessEntityID}, readEmployeeDTO);
+            return CreatedAtAction(nameof(Get), new { Id = employee.BusinessEntityID }, readEmployeeDTO);
         }
 
         [HttpPatch("{id}")]

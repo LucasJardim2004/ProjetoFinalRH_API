@@ -10,6 +10,8 @@ namespace RhManagementApi.DTOs
         /// </summary>
         public int BusinessEntityID { get; set; }
 
+        public DateTime? RateChangeDate { get; set; }
+
         /// <summary>
         /// Salary hourly rate.
         /// </summary>

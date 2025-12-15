@@ -8,7 +8,7 @@ namespace RhManagementApi.DTOs
 
         public string? Description { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTime? DateCreated { get; set; }
 
         public bool OpenFlag { get; set; }
     }

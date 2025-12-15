@@ -68,15 +68,5 @@ namespace RhManagementApi.Models
         /// Personal information collected for sales analysis.
         /// </summary>
         public string? Demographics { get; set; }
-
-        /// <summary>
-        /// ROWGUIDCOL number uniquely identifying the record.
-        /// </summary>
-        public Guid rowguid { get; set; }
-
-        /// <summary>
-        /// Date and time the record was last updated.
-        /// </summary>
-        public DateTime ModifiedDate { get; set; }
     }
 }

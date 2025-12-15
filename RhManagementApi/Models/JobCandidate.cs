@@ -20,11 +20,6 @@ public partial class JobCandidate
     /// </summary>
     public string? Resume { get; set; }
 
-    /// <summary>
-    /// Date and time the record was last updated.
-    /// </summary>
-    public DateTime ModifiedDate { get; set; }
-
     public string? ResumeFile { get; set; }
 
     public virtual Employee? BusinessEntity { get; set; }

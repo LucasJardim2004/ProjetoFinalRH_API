@@ -13,9 +13,5 @@ namespace RhManagementApi.Models
         
         [Required]
         public string EmailAddress {get;set;}
-
-        [Required]
-        public DateTime ModifiedDate {get;set;}
-
     }
 }
