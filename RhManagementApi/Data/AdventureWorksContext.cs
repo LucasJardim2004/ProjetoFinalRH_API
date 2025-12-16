@@ -67,7 +67,6 @@ public partial class AdventureWorksContext : DbContext
             entity.HasKey(e => e.BusinessEntityID);
             entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
 
-
             entity.Property(e => e.BirthDate).HasColumnType("datetime"); // ensure datetime (DB default)
             entity.Property(e => e.HireDate).HasColumnType("datetime");  // ensure datetime
 

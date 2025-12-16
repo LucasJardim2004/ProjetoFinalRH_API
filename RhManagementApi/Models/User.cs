@@ -1,8 +1,11 @@
-// using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
-// public class User : IdentityUser
-// {
-//     public string? FullName { get; set; }
+namespace RhManagementApi.Models
+{
+    public class User : IdentityUser<int>
+    {
+        public string? FullName { get; set; }
 
-//     public int? BusinessEntityID { get; set; }
-// }
+        public int? BusinessEntityID { get; set; }
+    }
+}

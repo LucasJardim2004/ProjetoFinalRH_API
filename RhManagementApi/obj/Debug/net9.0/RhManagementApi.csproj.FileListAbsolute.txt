@@ -350,3 +350,5 @@ C:\Users\maencarn\RH_Proj\ProjetoFinalRH\RhManagementApi\obj\Debug\net9.0\static
 C:\Users\maencarn\RH_Proj\ProjetoFinalRH\RhManagementApi\obj\Debug\net9.0\RhManage.ABEFAD2B.Up2Date
 C:\Users\maencarn\RH_Proj\ProjetoFinalRH\RhManagementApi\obj\Debug\net9.0\RhManagementApi.genruntimeconfig.cache
 C:\Users\maencarn\RH_Proj\ProjetoFinalRH\RhManagementApi\obj\Debug\net9.0\ref\RhManagementApi.dll
+C:\Users\rodrmart\Formations\FinalProject\ProjetoFinalRH\RhManagementApi\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\rodrmart\Formations\FinalProject\ProjetoFinalRH\RhManagementApi\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

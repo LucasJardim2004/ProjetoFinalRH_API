@@ -4,6 +4,7 @@ using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using AutoMapper;
 using RhManagementApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RhManagementApi.Controllers
 {
@@ -41,6 +42,7 @@ namespace RhManagementApi.Controllers
             return Ok(EmployeeDTO);
         }
 
+        // [Authorize(Policy = "CanHireEmployee")]
         [HttpPost]
         public async Task<IActionResult> Create(EmployeeWithPersonDTO employeeWithPersonDTO)
         {
@@ -50,7 +52,6 @@ namespace RhManagementApi.Controllers
             db.BusinessEntities.Add(be);
             await db.SaveChangesAsync();                 // identity generated
             var newId = be.BusinessEntityID;
-
 
             // 2) Person
             var person = new Person
