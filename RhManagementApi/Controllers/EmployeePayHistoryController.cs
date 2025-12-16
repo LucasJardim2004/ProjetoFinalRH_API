@@ -33,14 +33,8 @@ namespace RhManagementApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(EmployeePayHistoryDTO employeePayHistoryDTO)
         {
-            var rateChangeDate = employeePayHistoryDTO.RateChangeDate.Value;
-            if (employeePayHistoryDTO.RateChangeDate.HasValue)
-            {
-                
-                if (rateChangeDate < DateTime.MinValue || rateChangeDate > DateTime.MaxValue)
-                    return BadRequest("StartDate is out of range.");
-            }
-            else {rateChangeDate = DateTime.Now;}
+            if(employeePayHistoryDTO.RateChangeDate == null)
+                employeePayHistoryDTO.RateChangeDate = DateTime.Now;
 
             var employeePayHistory = this.mapper.Map<EmployeePayHistory>(employeePayHistoryDTO);
             this.db.EmployeePayHistories.Add(employeePayHistory);

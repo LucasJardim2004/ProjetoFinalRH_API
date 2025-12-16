@@ -17,7 +17,7 @@ namespace RhManagementApi.DTOs
         /// <summary>
         /// Date the employee started work in the department.
         /// </summary>
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         /// <summary>
         /// Date the employee left the department. NULL = Current department.

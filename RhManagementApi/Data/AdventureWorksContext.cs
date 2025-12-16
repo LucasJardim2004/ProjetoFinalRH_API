@@ -9,8 +9,8 @@ public partial class AdventureWorksContext : DbContext
         : base(options)
     {
     }
-    public virtual DbSet<BusinessEntity> BusinessEntities { get; set; }
 
+    public virtual DbSet<BusinessEntity> BusinessEntities { get; set; }
     public virtual DbSet<CandidateInfo> CandidateInfos { get; set; }
 
     public virtual DbSet<Department> Departments { get; set; }
