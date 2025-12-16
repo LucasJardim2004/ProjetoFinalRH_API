@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RhManagementApi.Data;
+using RhManagementApi.DTOs;
 using RhManagementApi.Models;
 using RhManagementApi.Services;
 
@@ -40,14 +41,6 @@ namespace YourApp.Api.Controllers
         }
 
         // ==========================
-        // DTOs
-        // ==========================
-        public record RegisterDto(string Email, string UserName, string Password, string FullName, int BusinessEntityID);
-        public record LoginDto(string Email, string Password);
-        public record TokenResponse(string AccessToken, string RefreshToken);
-        public record RefreshRequest(string RefreshToken);
-
-        // ==========================
         // REGISTER
         // ==========================
         /// <summary>
@@ -55,7 +48,7 @@ namespace YourApp.Api.Controllers
         /// Returns access & refresh tokens.
         /// </summary>
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+        public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
         {
             // Optional: validate BusinessEntityID exists in AdventureWorks Employee table
             if (dto.BusinessEntityID is int beId)
@@ -86,7 +79,7 @@ namespace YourApp.Api.Controllers
             var (refreshToken, refreshExpires) = _tokenService.CreateRefreshToken();
             await SaveRefreshTokenAsync(user.Id, refreshToken, refreshExpires);
 
-            return Ok(new TokenResponse(accessToken, refreshToken));
+            return Ok(new TokenResponseDTO(accessToken, refreshToken));
         }
 
         // ==========================
@@ -96,7 +89,7 @@ namespace YourApp.Api.Controllers
         /// Logs in with email/password. Returns access & refresh tokens.
         /// </summary>
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto dto)
+        public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
             if (user is null) return Unauthorized("Invalid credentials");
@@ -109,7 +102,47 @@ namespace YourApp.Api.Controllers
             var (refreshToken, refreshExpires) = _tokenService.CreateRefreshToken();
             await SaveRefreshTokenAsync(user.Id, refreshToken, refreshExpires);
 
-            return Ok(new TokenResponse(accessToken, refreshToken));
+            return Ok(new TokenResponseDTO(accessToken, refreshToken));
+        }
+
+
+
+        [HttpPost("update-roles")]
+        public async Task<IActionResult> UpdateRoles([FromBody] UpdateRoleDTO dto)
+        {
+            var user = await _userManager.FindByIdAsync(dto.UserId.ToString());
+            if (user == null) return NotFound($"User {dto.UserId} not found.");
+
+            // Add roles
+            if (dto.AddRoles != null && dto.AddRoles.Any())
+            {
+                foreach (var role in dto.AddRoles)
+                {
+                    await EnsureRoleAsync(role);
+                    if (!await _userManager.IsInRoleAsync(user, role))
+                        await _userManager.AddToRoleAsync(user, role);
+                }
+            }
+
+            // Remove roles
+            if (dto.RemoveRoles != null && dto.RemoveRoles.Any())
+            {
+                foreach (var role in dto.RemoveRoles)
+                {
+                    if (await _userManager.IsInRoleAsync(user, role))
+                        await _userManager.RemoveFromRoleAsync(user, role);
+                }
+            }
+
+            var updatedRoles = await _userManager.GetRolesAsync(user);
+            var newAccessToken = await _tokenService.CreateAccessTokenAsync(user);
+
+            return Ok(new
+            {
+                userId = user.Id,
+                roles = updatedRoles,
+                accessToken = newAccessToken
+            });
         }
 
         // ==========================
@@ -119,7 +152,7 @@ namespace YourApp.Api.Controllers
         /// Exchanges a valid (non-revoked) refresh token for a new access & refresh token (rotation).
         /// </summary>
         [HttpPost("refresh")]
-        public async Task<IActionResult> Refresh([FromBody] RefreshRequest req)
+        public async Task<IActionResult> Refresh([FromBody] RefreshRequestDTO req)
         {
             var entry = await _authDb.Set<UserRefreshToken>()
                 .FirstOrDefaultAsync(x => x.Token == req.RefreshToken && !x.Revoked && x.Expires > DateTime.UtcNow);
@@ -138,7 +171,7 @@ namespace YourApp.Api.Controllers
             var access = await _tokenService.CreateAccessTokenAsync(user);
             await _authDb.SaveChangesAsync();
 
-            return Ok(new TokenResponse(access, newRefresh));
+            return Ok(new TokenResponseDTO(access, newRefresh));
         }
 
         // ==========================
@@ -149,7 +182,7 @@ namespace YourApp.Api.Controllers
         /// </summary>
         [HttpPost("logout")]
         [Authorize] // optional: require auth to logout
-        public async Task<IActionResult> Logout([FromBody] RefreshRequest req)
+        public async Task<IActionResult> Logout([FromBody] RefreshRequestDTO req)
         {
             var entry = await _authDb.Set<UserRefreshToken>().FirstOrDefaultAsync(x => x.Token == req.RefreshToken);
             if (entry != null)
@@ -197,7 +230,6 @@ namespace YourApp.Api.Controllers
                 await _roleManager.CreateAsync(new Role { Name = roleName });
             }
         }
-
 
         private async Task SaveRefreshTokenAsync(int userId, string token, DateTime expires)
         {

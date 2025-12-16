@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GDsX+XRg97c=",
+  "dgSpecHash": "OJjSgS2oAOE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj",
+  "projectFilePath": "c:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rodrmart\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\rodrmart\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

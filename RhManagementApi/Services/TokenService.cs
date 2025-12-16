@@ -4,124 +4,79 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using RhManagementApi.Models;
 
 namespace RhManagementApi.Services
 {
-    /// <summary>
-    /// Responsible for issuing JWT access tokens and generating secure refresh tokens.
-    /// </summary>
+    public class JwtOptions
+    {
+        public string Issuer { get; set; } = default!;
+        public string Audience { get; set; } = default!;
+        public string Key { get; set; } = default!; // 32+ bytes recommended
+        public int AccessTokenMinutes { get; set; } = 60;  // default 60 minutes
+        public int RefreshTokenDays { get; set; } = 14;    // default 14 days
+    }
+
     public class TokenService
     {
-        private readonly IConfiguration _config;
         private readonly UserManager<User> _userManager;
+        private readonly JwtOptions _options;
 
-        public TokenService(IConfiguration config, UserManager<User> userManager)
+        public TokenService(UserManager<User> userManager, IOptions<JwtOptions> options)
         {
-            _config = config;
             _userManager = userManager;
+            _options = options.Value;
         }
 
-        /// <summary>
-        /// Creates a signed JWT access token for the specified user, embedding roles and custom claims.
-        /// </summary>
         public async Task<string> CreateAccessTokenAsync(User user)
         {
-            // Read JWT settings
-            var issuer = _config["Jwt:Issuer"];
-            var audience = _config["Jwt:Audience"];
-            var keyBytes = Encoding.UTF8.GetBytes(_config["Jwt:Key"]!);
-            var signingKey = new SymmetricSecurityKey(keyBytes);
-            var creds = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            // Guard: ensure options are present
+            if (string.IsNullOrWhiteSpace(_options.Key))
+                throw new InvalidOperationException("JWT Key is not configured.");
+            if (string.IsNullOrWhiteSpace(_options.Issuer))
+                throw new InvalidOperationException("JWT Issuer is not configured.");
+            if (string.IsNullOrWhiteSpace(_options.Audience))
+                throw new InvalidOperationException("JWT Audience is not configured.");
 
-            // Roles
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Key));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
             var roles = await _userManager.GetRolesAsync(user);
-
-            // Claims (include your custom fields)
 
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName ?? ""),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim("full_name", user.FullName ?? ""),
-                new Claim("business_entity_id", user.BusinessEntityID?.ToString() ?? "")
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName ?? string.Empty),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
+                new Claim("full_name", user.FullName ?? string.Empty),
+                new Claim("business_entity_id", user.BusinessEntityID.ToString())
             };
 
-
-            // Optional but useful claims
-            if (!string.IsNullOrWhiteSpace(user.Email))
-                claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
-
-            // Role claims
+            // Add role claims
             claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
 
-            // Lifetime
-            var minutes = int.TryParse(_config["Jwt:AccessTokenMinutes"], out var m) ? m : 15;
-
-            var token = new JwtSecurityToken(
-                issuer: issuer,
-                audience: audience,
+            var now = DateTime.UtcNow;
+            var jwt = new JwtSecurityToken(
+                issuer: _options.Issuer,
+                audience: _options.Audience,
                 claims: claims,
-                notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddMinutes(minutes),
-                signingCredentials: creds
-            );
+                notBefore: now,
+                expires: now.AddMinutes(_options.AccessTokenMinutes),
+                signingCredentials: creds);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new JwtSecurityTokenHandler().WriteToken(jwt);
         }
 
-        /// <summary>
-        /// Generates a cryptographically strong refresh token and its expiration timestamp.
-        /// </summary>
-        public (string Token, DateTime Expires) CreateRefreshToken()
+        public (string token, DateTime expires) CreateRefreshToken()
         {
-            // 64 bytes of entropy → Base64 (~88 chars). Adjust length if you prefer shorter.
-            var bytes = new byte[64];
-            using var rng = RandomNumberGenerator.Create();
-            rng.GetBytes(bytes);
+            // Generate a strong opaque token
+            var bytes = RandomNumberGenerator.GetBytes(64); // 512 bits
+            var token = Convert.ToBase64String(bytes);
 
-            var refreshToken = Convert.ToBase64String(bytes);
-
-            var days = int.TryParse(_config["Jwt:RefreshTokenDays"], out var d) ? d : 7;
-            var expires = DateTime.UtcNow.AddDays(days);
-
-            return (refreshToken, expires);
-        }
-
-        /// <summary>
-        /// (Optional) Validates a JWT without checking its expiration, useful for refresh flows
-        /// if you need to read claims from an expired access token.
-        /// </summary>
-        public ClaimsPrincipal? GetPrincipalFromExpiredToken(string token)
-        {
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidIssuer = _config["Jwt:Issuer"],
-                ValidAudience = _config["Jwt:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!)),
-                ValidateIssuerSigningKey = true,
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = false // <-- allow expired tokens
-            };
-
-            var handler = new JwtSecurityTokenHandler();
-            try
-            {
-                var principal = handler.ValidateToken(token, tokenValidationParameters, out var securityToken);
-                if (securityToken is JwtSecurityToken jwt &&
-                    jwt.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return principal;
-                }
-            }
-            catch
-            {
-                // swallow and return                // swallow and return null
-            }
-            return null;
+            var expires = DateTime.UtcNow.AddDays(_options.RefreshTokenDays);
+            return (token, expires);
         }
     }
 }
