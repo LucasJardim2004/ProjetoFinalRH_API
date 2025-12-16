@@ -43,11 +43,18 @@ namespace RhManagementApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(OpeningDTO openingDTO)
         {
-
-            if(openingDTO.DateCreated == null)
-                openingDTO.DateCreated = DateTime.Now;
+            var dateCreated = openingDTO.DateCreated.Value;
+            if (openingDTO.DateCreated.HasValue)
+            {
+                
+                if (dateCreated < DateTime.MinValue || dateCreated > DateTime.MaxValue)
+                    return BadRequest("StartDate is out of range.");
+            }
+            else {dateCreated = DateTime.Now;}
 
             var opening = this.mapper.Map<Opening>(openingDTO);
+
+            opening.OpenFlag = false;
 
             this.db.Openings.Add(opening);
             await this.db.SaveChangesAsync();
@@ -60,6 +67,13 @@ namespace RhManagementApi.Controllers
         public async Task<IActionResult> Patch(int id, OpeningDTO openingDTO)
         {
             if (id != openingDTO.OpeningID) return BadRequest();
+
+            if (openingDTO.DateCreated.HasValue)
+            {
+                var dateCreated = openingDTO.DateCreated.Value;
+                if (dateCreated < DateTime.MinValue || dateCreated > DateTime.MaxValue)
+                    return BadRequest("StartDate is out of range.");
+            }
 
             var opening = await this.db.Openings
                 .FirstOrDefaultAsync(e => e.OpeningID == id);

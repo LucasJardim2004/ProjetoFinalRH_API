@@ -33,6 +33,21 @@ namespace RhManagementApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(EmployeeDepartmentHistoryDTO employeeDepartmentHistoryDTO)
         {
+            if (employeeDepartmentHistoryDTO.EndDate.HasValue)
+            {
+                var endDate = employeeDepartmentHistoryDTO.EndDate.Value;
+                if (endDate < DateTime.MinValue || endDate > DateTime.MaxValue)
+                    return BadRequest("EndDate is out of range.");
+            }
+            var startDate = employeeDepartmentHistoryDTO.StartDate.Value;
+            if (employeeDepartmentHistoryDTO.StartDate.HasValue)
+            {
+                
+                if (startDate < DateTime.MinValue || startDate > DateTime.MaxValue)
+                    return BadRequest("StartDate is out of range.");
+            }
+            else {startDate = DateTime.Now;}
+
             var employeeDepartmentHistory = this.mapper.Map<EmployeeDepartmentHistory>(employeeDepartmentHistoryDTO);
             this.db.EmployeeDepartmentHistories.Add(employeeDepartmentHistory);
             await this.db.SaveChangesAsync();
@@ -46,6 +61,20 @@ namespace RhManagementApi.Controllers
         public async Task<IActionResult> Patch(int id, DateTime startDate, EmployeeDepartmentHistoryDTO employeeDepartmentHistoryDTO)
         {
             if (id != employeeDepartmentHistoryDTO.BusinessEntityID) return BadRequest();
+
+            if (employeeDepartmentHistoryDTO.EndDate.HasValue)
+            {
+                var endDate = employeeDepartmentHistoryDTO.EndDate.Value;
+                if (endDate < DateTime.MinValue || endDate > DateTime.MaxValue)
+                    return BadRequest("EndDate is out of range.");
+            }
+
+            if (employeeDepartmentHistoryDTO.StartDate.HasValue)
+            {
+                var parameterStartDate = employeeDepartmentHistoryDTO.StartDate.Value;
+                if (parameterStartDate < DateTime.MinValue || parameterStartDate > DateTime.MaxValue)
+                    return BadRequest("StartDate is out of range.");
+            }
 
             var employeeDepartmentHistory = await this.db.EmployeeDepartmentHistories
                 .FirstOrDefaultAsync(e => e.BusinessEntityID == id && e.StartDate == startDate);
