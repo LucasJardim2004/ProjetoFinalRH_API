@@ -121,7 +121,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("Frontend", policy =>
     {
-        policy.WithOrigins("https://localhost:5173")
+        policy.WithOrigins("http://localhost:5173", "https://localhost:5173")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -138,7 +138,7 @@ app.UseSwaggerUI(c =>
     c.DocumentTitle = "RH Management API Docs";
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
     c.DefaultModelExpandDepth(2);
-       c.DefaultModelsExpandDepth(-1);
+    c.DefaultModelsExpandDepth(-1);
 });
 
 app.UseHttpsRedirection();
