@@ -14,7 +14,7 @@ using RhManagementApi.Services;
 namespace YourApp.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
@@ -104,7 +104,6 @@ namespace YourApp.Api.Controllers
 
             return Ok(new TokenResponseDTO(accessToken, refreshToken));
         }
-
 
 
         [HttpPost("update-roles")]

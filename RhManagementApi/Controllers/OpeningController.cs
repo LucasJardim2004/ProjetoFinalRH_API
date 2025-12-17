@@ -4,7 +4,8 @@ using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using AutoMapper;
 using RhManagementApi.Models;
- 
+using Microsoft.AspNetCore.Authorization;
+
 namespace RhManagementApi.Controllers
 {
     [ApiController]
@@ -39,8 +40,10 @@ namespace RhManagementApi.Controllers
  
             return Ok(openingDTO);
         }
- 
+
+        
         [HttpPost]
+        [Authorize(Policy = "fullPermission")]
         public async Task<IActionResult> Create(OpeningDTO openingDTO)
         {
             var dateCreated = openingDTO.DateCreated.Value;
@@ -62,8 +65,9 @@ namespace RhManagementApi.Controllers
             var readOpeningDTO = this.mapper.Map<OpeningDTO>(opening);
             return CreatedAtAction(nameof(Get),new {Id = opening.OpeningID}, readOpeningDTO);
         }
- 
+
         [HttpPatch("{id}")]
+        [Authorize(Policy = "fullPermission")]
         public async Task<IActionResult> Patch(int id, OpeningDTO openingDTO)
         {
             if (id != openingDTO.OpeningID) return BadRequest();
@@ -90,6 +94,7 @@ namespace RhManagementApi.Controllers
         }
  
         [HttpDelete("{id}")]
+        [Authorize(Policy = "fullPermission")]
         public async Task<IActionResult> Delete (int id)
         {
             var opening = await this.db.Openings.FindAsync(id);

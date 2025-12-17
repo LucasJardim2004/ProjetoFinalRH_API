@@ -13,10 +13,13 @@ namespace RhManagementApi.Controllers
     {
         private readonly AdventureWorksContext db;
         private readonly IMapper mapper;
-        public JobCandidateController(AdventureWorksContext db, IMapper mapper)
+        private readonly IWebHostEnvironment env;
+        private string ContentRootPath => env.ContentRootPath;
+        public JobCandidateController(AdventureWorksContext db, IMapper mapper, IWebHostEnvironment env)
         {
             this.db = db;
             this.mapper = mapper;
+            this.env = env;
         }
 
         [HttpGet]
@@ -78,6 +81,45 @@ namespace RhManagementApi.Controllers
             await this.db.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPost("upload-cv")]
+        public async Task<IActionResult> UploadCv([FromForm] IFormFile file, [FromForm] string nationalId)
+        {
+        if (file == null || file.Length == 0)
+        return BadRequest("No file uploaded.");
+ 
+        if (string.IsNullOrWhiteSpace(nationalId))
+        return BadRequest("National ID is required.");
+ 
+        // Pasta onde vamos guardar os CVs (ex: /ProjetoFinalRH_API/CvFiles)
+        var uploadsFolder = Path.Combine(ContentRootPath, "CvFiles");
+        if (!Directory.Exists(uploadsFolder))
+        {
+        Directory.CreateDirectory(uploadsFolder);
+        }
+ 
+        // Extensão original (.pdf, .doc, etc.)
+        var extension = Path.GetExtension(file.FileName);
+        if (string.IsNullOrWhiteSpace(extension))
+        {
+        extension = ".pdf"; // fallback
+        }
+ 
+        // Nome final do ficheiro: nationalId + extensão
+        var safeNationalId = nationalId.Trim();
+        var newFileName = $"{safeNationalId}{extension}".Replace(" ", "_");
+ 
+        var fullPath = Path.Combine(uploadsFolder, newFileName);
+ 
+        // Gravar ficheiro no disco
+        using (var stream = new FileStream(fullPath, FileMode.Create))
+        {
+        await file.CopyToAsync(stream);
+        }
+ 
+        // Devolver só o nome para guardar em ResumeFile
+        return Ok(new { fileName = newFileName });
         }
     }
 }

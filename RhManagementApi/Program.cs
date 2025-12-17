@@ -79,9 +79,7 @@ builder.Services.AddAuthentication(options =>
 // Authorization policies
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("RequireAdmin", p => p.RequireRole("Admin"));
-
-    options.AddPolicy("CanHireEmployee", p =>
+    options.AddPolicy("fullPermission", p =>
         p.RequireRole("RH", "Admin")
          .RequireClaim("business_entity_id"));
 });

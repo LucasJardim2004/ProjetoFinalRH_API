@@ -8,7 +8,7 @@ namespace RhManagementApi.DTOs
 
         public RefreshRequestDTO(string refreshToken) 
         {
-            this.refreshToken = refreshToken;    
+            RefreshToken = refreshToken;    
         }
     }
 }

@@ -4,7 +4,8 @@ using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using AutoMapper;
 using RhManagementApi.Models;
- 
+using Microsoft.AspNetCore.Authorization;
+
 namespace RhManagementApi.Controllers
 {
     [ApiController]
@@ -23,7 +24,7 @@ namespace RhManagementApi.Controllers
         public async Task<IActionResult> GetAll()
         {
             var employee = await this.db.Employees
-                .Take(10)
+                .Take(50)
                 .ToListAsync();
  
             return Ok(employee);
@@ -31,6 +32,7 @@ namespace RhManagementApi.Controllers
  
  
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> Get(int id)
         {
             // 1) Load Employee with its own relationships
