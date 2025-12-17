@@ -43,21 +43,14 @@ namespace RhManagementApi.Controllers
 
         
         [HttpPost]
-        [Authorize(Policy = "fullPermission")]
+        // [Authorize(Policy = "fullPermission")]
         public async Task<IActionResult> Create(OpeningDTO openingDTO)
         {
-            var dateCreated = openingDTO.DateCreated.Value;
-            if (openingDTO.DateCreated.HasValue)
-            {
-               
-                if (dateCreated < DateTime.MinValue || dateCreated > DateTime.MaxValue)
-                    return BadRequest("StartDate is out of range.");
-            }
-            else {dateCreated = DateTime.Now;}
+            openingDTO.DateCreated = DateTime.Now;
  
             var opening = this.mapper.Map<Opening>(openingDTO);
  
-            opening.OpenFlag = false;
+            opening.OpenFlag = true;
  
             this.db.Openings.Add(opening);
             await this.db.SaveChangesAsync();
@@ -67,7 +60,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpPatch("{id}")]
-        [Authorize(Policy = "fullPermission")]
+        // [Authorize(Policy = "fullPermission")]
         public async Task<IActionResult> Patch(int id, OpeningDTO openingDTO)
         {
             if (id != openingDTO.OpeningID) return BadRequest();
