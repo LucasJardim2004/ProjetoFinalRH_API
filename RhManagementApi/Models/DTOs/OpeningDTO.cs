@@ -4,7 +4,7 @@ namespace RhManagementApi.DTOs
     {
         public int OpeningID { get; set; }
 
-        public string JobTitle { get; set; } = null!;
+        public string? JobTitle { get; set; } = null!;
 
         public string? Description { get; set; }
 

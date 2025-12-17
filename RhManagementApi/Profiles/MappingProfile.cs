@@ -11,6 +11,7 @@ namespace Livraria.Profiles
             CreateMap<CandidateInfo, CandidateInfoDTO>().ReverseMap();
             CreateMap<Department, DepartmentDTO>().ReverseMap();
             CreateMap<Employee, EmployeeDTO>().ReverseMap()
+                // .ForMember(d => d.OrganizationLevel, opt => opt.MapFrom(s => s.OrganizationLevel))
                 .ForMember(d => d.EmployeeDepartmentHistories, opt => opt.Ignore())
                 .ForMember(d => d.EmployeePayHistories, opt => opt.Ignore());
             CreateMap<EmployeeDepartmentHistory, EmployeeDepartmentHistoryDTO>().ReverseMap();

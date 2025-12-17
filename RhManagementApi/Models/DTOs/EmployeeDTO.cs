@@ -27,7 +27,7 @@ namespace RhManagementApi.DTOs
         /// </summary>
         public DateTime? BirthDate { get; set; }
 
-        public short? OrganizationLevel { get; set; }
+        // public short? OrganizationLevel { get; set; }
 
         /// <summary>
         /// M = Married, S = Single.

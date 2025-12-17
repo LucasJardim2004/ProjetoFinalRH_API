@@ -72,8 +72,8 @@ public partial class AdventureWorksContext : DbContext
 
             entity.Property(e => e.OrganizationNode).HasColumnType("hierarchyid");
 
-            entity.Property(e => e.OrganizationLevel)
-                  .HasComputedColumnSql("([OrganizationNode].GetLevel)", stored: false);
+            // entity.Property(e => e.OrganizationLevel)
+            //       .HasComputedColumnSql("([OrganizationNode].GetLevel)", stored: false);
         });
 
 

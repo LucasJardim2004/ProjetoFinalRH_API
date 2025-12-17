@@ -32,7 +32,7 @@ namespace RhManagementApi.Models
         /// <summary>
         /// The depth of the employee in the corporate hierarchy (computed in DB).
         /// </summary>
-        public short? OrganizationLevel { get; set; }
+        // public short? OrganizationLevel { get; set; }
 
         /// <summary>
         /// Work title such as Buyer or Sales Representative.

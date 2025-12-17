@@ -32,8 +32,6 @@ namespace RhManagementApi.DTOs
 
         public string Comment {get;set;} = null!;
 
-        public virtual JobCandidate JobCandidate { get; set; } = null!;
-
-        public virtual Opening Opening { get; set; } = null!;
+        public virtual JobCandidate? JobCandidate { get; set; } = null!;
     }
 }
