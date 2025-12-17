@@ -31,60 +31,70 @@ namespace RhManagementApi.Controllers
         }
  
         [HttpPost]
-        public async Task<IActionResult> Create(EmployeeDepartmentHistoryDTO employeeDepartmentHistoryDTO)
+        public async Task<IActionResult> Create([FromBody] EmployeeDepartmentHistoryDTO dto)
         {
-            if (employeeDepartmentHistoryDTO.EndDate.HasValue)
+            if (dto == null) return BadRequest("Body is required.");
+ 
+            // Required fields
+            if (!dto.BusinessEntityID.HasValue) return BadRequest("BusinessEntityID is required.");
+            if (!dto.DepartmentID.HasValue) return BadRequest("DepartmentID is required.");
+ 
+            // Business rules
+            if (dto.DepartmentID.Value < 1 || dto.DepartmentID.Value > 16)
+                return BadRequest("DepartmentID must be between 1 and 16.");
+ 
+            // Validate EndDate (if provided)
+            if (dto.EndDate.HasValue)
             {
-                var endDate = employeeDepartmentHistoryDTO.EndDate.Value;
-                if (endDate <= DateTime.MinValue || endDate >= DateTime.MaxValue)
+                var end = dto.EndDate.Value;
+                if (end <= DateTime.MinValue || end >= DateTime.MaxValue)
                     return BadRequest("EndDate is out of range.");
             }
-            var startDate = employeeDepartmentHistoryDTO.StartDate.Value;
-            if (employeeDepartmentHistoryDTO.StartDate.HasValue)
-            {
-               
-                if (startDate <= DateTime.MinValue || startDate >= DateTime.MaxValue)
-                    return BadRequest("StartDate is out of range.");
-            }
-            else {startDate = DateTime.Now;}
  
-            var employeeDepartmentHistory = this.mapper.Map<EmployeeDepartmentHistory>(employeeDepartmentHistoryDTO);
-            this.db.EmployeeDepartmentHistories.Add(employeeDepartmentHistory);
+            // Choose StartDate (defaults to today if not provided)
+            var start = dto.StartDate ?? DateTime.UtcNow.Date;
+            if (start <= DateTime.MinValue || start >= DateTime.MaxValue)
+                return BadRequest("StartDate is out of range.");
+ 
+            // Map and enforce StartDate/EndDate explicitly
+            var entity = this.mapper.Map<EmployeeDepartmentHistory>(dto);
+            entity.StartDate = start;
+            if (!dto.EndDate.HasValue) entity.EndDate = null; // Explicitly null is fine
+ 
+            this.db.EmployeeDepartmentHistories.Add(entity);
             await this.db.SaveChangesAsync();
  
-            var readEmployeeDepartmentHistoryDTO = this.mapper.Map<EmployeeDepartmentHistoryDTO>(employeeDepartmentHistory);
-            return CreatedAtAction(nameof(Get),new {Id = employeeDepartmentHistory.BusinessEntityID}, readEmployeeDepartmentHistoryDTO);
+            var readDto = this.mapper.Map<EmployeeDepartmentHistoryDTO>(entity);
+            return CreatedAtAction(nameof(Get), new { id = entity.BusinessEntityID }, readDto);
         }
- 
-        // TODO: TORNAR BONITO
+       
         [HttpPatch("{id}_{startDate}")]
-        public async Task<IActionResult> Patch(int id, DateTime startDate, EmployeeDepartmentHistoryDTO employeeDepartmentHistoryDTO)
+        public async Task<IActionResult> Patch(int id, DateTime startDate, EmployeeDepartmentHistoryDTO dto)
         {
-            if (id != employeeDepartmentHistoryDTO.BusinessEntityID) return BadRequest();
+            if (id != dto.BusinessEntityID) return BadRequest("ID mismatch");
  
-            if (employeeDepartmentHistoryDTO.EndDate.HasValue)
+            if (dto.EndDate.HasValue)
             {
-                var endDate = employeeDepartmentHistoryDTO.EndDate.Value;
+                var endDate = dto.EndDate.Value;
                 if (endDate <= DateTime.MinValue || endDate >= DateTime.MaxValue)
                     return BadRequest("EndDate is out of range.");
             }
  
-            if (employeeDepartmentHistoryDTO.StartDate.HasValue)
-            {
-                var parameterStartDate = employeeDepartmentHistoryDTO.StartDate.Value;
-                if (parameterStartDate <= DateTime.MinValue || parameterStartDate >= DateTime.MaxValue)
-                    return BadRequest("StartDate is out of range.");
-            }
+            // Find by date-only to avoid TZ/tick mismatches
+            var edh = await db.EmployeeDepartmentHistories
+                .FirstOrDefaultAsync(e =>
+                    e.BusinessEntityID == id &&
+                    EF.Functions.DateDiffDay(e.StartDate, startDate) == 0);
  
-            var employeeDepartmentHistory = await this.db.EmployeeDepartmentHistories
-                .FirstOrDefaultAsync(e => e.BusinessEntityID == id && e.StartDate == startDate);
+            if (edh == null) return NotFound();
  
-            if (employeeDepartmentHistory == null) return NotFound();
+            if (dto.EndDate != null)
+                edh.EndDate = dto.EndDate;
  
-            if (employeeDepartmentHistoryDTO.EndDate != null) employeeDepartmentHistory.EndDate = employeeDepartmentHistoryDTO.EndDate;
+            await db.SaveChangesAsync();
  
-            await this.db.SaveChangesAsync();
-            return Ok(this.mapper.Map<EmployeeDepartmentHistoryDTO>(employeeDepartmentHistory));
+            var result = mapper.Map<EmployeeDepartmentHistoryDTO>(edh);
+            return Ok(result);
         }
     }
 }

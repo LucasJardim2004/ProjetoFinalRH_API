@@ -24,7 +24,7 @@ namespace RhManagementApi.Controllers
         public async Task<IActionResult> GetAll()
         {
             var employee = await this.db.Employees
-                .Take(50)
+                .Take(100)
                 .ToListAsync();
  
             return Ok(employee);
@@ -32,7 +32,7 @@ namespace RhManagementApi.Controllers
  
  
         [HttpGet("{id}")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> Get(int id)
         {
             // 1) Load Employee with its own relationships
