@@ -87,7 +87,7 @@ namespace RhManagementApi.Controllers
         }
  
         [HttpDelete("{id}")]
-        [Authorize(Policy = "fullPermission")]
+        // [Authorize(Policy = "fullPermission")]
         public async Task<IActionResult> Delete (int id)
         {
             var opening = await this.db.Openings.FindAsync(id);

@@ -32,7 +32,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get (int id)
+        public async Task<IActionResult> Get(int id)
         {
             var candidate = await this.db.JobCandidates
                 .FirstOrDefaultAsync(o => o.JobCandidateID == id);
@@ -51,7 +51,7 @@ namespace RhManagementApi.Controllers
             await this.db.SaveChangesAsync();
 
             var readCandidateDTO = this.mapper.Map<JobCandidateDTO>(candidate);
-            return CreatedAtAction(nameof(Get),new {Id = candidate.JobCandidateID}, readCandidateDTO);
+            return CreatedAtAction(nameof(Get), new { Id = candidate.JobCandidateID }, readCandidateDTO);
         }
 
         [HttpPatch("{id}")]
@@ -72,7 +72,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete (int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var candidate = await this.db.JobCandidates.FindAsync(id);
             if (candidate == null) return NotFound();
@@ -86,40 +86,56 @@ namespace RhManagementApi.Controllers
         [HttpPost("upload-cv")]
         public async Task<IActionResult> UploadCv([FromForm] IFormFile file, [FromForm] string nationalId)
         {
-        if (file == null || file.Length == 0)
-        return BadRequest("No file uploaded.");
- 
-        if (string.IsNullOrWhiteSpace(nationalId))
-        return BadRequest("National ID is required.");
- 
-        // Pasta onde vamos guardar os CVs (ex: /ProjetoFinalRH_API/CvFiles)
-        var uploadsFolder = Path.Combine(ContentRootPath, "CvFiles");
-        if (!Directory.Exists(uploadsFolder))
-        {
-        Directory.CreateDirectory(uploadsFolder);
+            if (file == null || file.Length == 0)
+                return BadRequest("No file uploaded.");
+
+            if (string.IsNullOrWhiteSpace(nationalId))
+                return BadRequest("National ID is required.");
+
+            // Pasta onde vamos guardar os CVs (ex: /ProjetoFinalRH_API/CvFiles)
+            var uploadsFolder = Path.Combine(ContentRootPath, "CvFiles");
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            // Extensão original (.pdf, .doc, etc.)
+            var extension = Path.GetExtension(file.FileName);
+            if (string.IsNullOrWhiteSpace(extension))
+            {
+                extension = ".pdf"; // fallback
+            }
+
+            // Nome final do ficheiro: nationalId + extensão
+            var safeNationalId = nationalId.Trim();
+            var newFileName = $"{safeNationalId}{extension}".Replace(" ", "_");
+
+            var fullPath = Path.Combine(uploadsFolder, newFileName);
+
+            // Gravar ficheiro no disco
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Devolver só o nome para guardar em ResumeFile
+            return Ok(new { fileName = newFileName });
         }
- 
-        // Extensão original (.pdf, .doc, etc.)
-        var extension = Path.GetExtension(file.FileName);
-        if (string.IsNullOrWhiteSpace(extension))
+
+        [HttpGet("download-cv/{fileName}")]
+        public IActionResult DownloadCv(string fileName)
         {
-        extension = ".pdf"; // fallback
-        }
- 
-        // Nome final do ficheiro: nationalId + extensão
-        var safeNationalId = nationalId.Trim();
-        var newFileName = $"{safeNationalId}{extension}".Replace(" ", "_");
- 
-        var fullPath = Path.Combine(uploadsFolder, newFileName);
- 
-        // Gravar ficheiro no disco
-        using (var stream = new FileStream(fullPath, FileMode.Create))
-        {
-        await file.CopyToAsync(stream);
-        }
- 
-        // Devolver só o nome para guardar em ResumeFile
-        return Ok(new { fileName = newFileName });
+            if (string.IsNullOrWhiteSpace(fileName))
+                return BadRequest("File name is required.");
+
+            var uploadsFolder = Path.Combine(ContentRootPath, "CvFiles");
+            var fullPath = Path.Combine(uploadsFolder, fileName);
+
+            if (!System.IO.File.Exists(fullPath))
+                return NotFound();
+
+            const string contentType = "application/octet-stream";
+            return PhysicalFile(fullPath, contentType, fileName);
         }
     }
 }
