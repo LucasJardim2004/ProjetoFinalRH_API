@@ -43,17 +43,16 @@ namespace RhManagementApi.Controllers
         [HttpGet("by-opening/{openingId}")]
         public async Task<IActionResult> GetByOpening(int openingId)
         {
-        var candidates = await this.db.CandidateInfos
-        .Where(c => c.OpeningID == openingId)
-        .Include(c => c.Opening)
-        .Include(c => c.JobCandidate)
-        .ToListAsync();
+            var candidates = await this.db.CandidateInfos
+                .Where(c => c.OpeningID == openingId)
+                .Include(c => c.Opening)
+                .Include(c => c.JobCandidate)
+                .ToListAsync();
 
-        var candidateDtos = this.mapper.Map<List<CandidateInfoDTO>>(candidates);
+            var candidateDtos = this.mapper.Map<List<CandidateInfoDTO>>(candidates);
 
-        return Ok(candidateDtos);
+            return Ok(candidateDtos);
         }
-
  
         [HttpPost]
         public async Task<IActionResult> Create(CandidateInfoDTO candidateDTO)
