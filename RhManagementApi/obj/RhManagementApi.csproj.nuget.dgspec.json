@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\RhManagementApi.csproj": {}
+    "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\RhManagementApi.csproj": {
+    "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\RhManagementApi.csproj",
+        "projectUniqueName": "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj",
         "projectName": "RhManagementApi",
-        "projectPath": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\RhManagementApi.csproj",
-        "packagesPath": "C:\\Users\\ljardim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\obj\\",
+        "projectPath": "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\RhManagementApi.csproj",
+        "packagesPath": "C:\\Users\\rodrmart\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rodrmart\\Formations\\FinalProject\\ProjetoFinalRH\\RhManagementApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ljardim\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\rodrmart\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -87,6 +87,34 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[10.0.0, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "Serilog.Enrichers.Environment": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Serilog.Enrichers.Process": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Serilog.Enrichers.Thread": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "Serilog.Formatting.Compact": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[6.1.1, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

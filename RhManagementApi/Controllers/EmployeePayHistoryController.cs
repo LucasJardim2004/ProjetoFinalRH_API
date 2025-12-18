@@ -43,23 +43,5 @@ namespace RhManagementApi.Controllers
             var readEmployeePayHistoryDTO = this.mapper.Map<EmployeePayHistoryDTO>(employeePayHistory);
             return CreatedAtAction(nameof(Get),new {Id = employeePayHistory.BusinessEntityID}, readEmployeePayHistoryDTO);
         }
-
-        // TODO: VERIFICAR SE E MESMO NECESSARIO PATCH
-        // [HttpPatch("{id}")]
-        // public async Task<IActionResult> Patch(int id, EmployeePayHistoryDTO employeePayHistoryDTO)
-        // {
-        //     if (id != employeePayHistoryDTO.BusinessEntityID) return BadRequest();
-
-        //     var employeePayHistory = await this.db.EmployeePayHistories
-        //         .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
-
-        //     if (employeePayHistory == null) return NotFound();
-
-        //     if (employeePayHistoryDTO.Rate != null) employeePayHistory.Rate = employeePayHistoryDTO.Rate;
-        //     if (employeePayHistoryDTO.PayFrequency != null) employeePayHistory.PayFrequency = employeePayHistoryDTO.PayFrequency;
-
-        //     await this.db.SaveChangesAsync();
-        //     return Ok(this.mapper.Map<EmployeePayHistoryDTO>(employeePayHistory));
-        // }
     }
 }

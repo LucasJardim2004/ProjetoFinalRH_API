@@ -79,8 +79,7 @@ namespace RhManagementApi.Controllers
  
             if (openingDTO.JobTitle != null) opening.JobTitle = openingDTO.JobTitle;
             if (openingDTO.Description != null) opening.Description = openingDTO.Description;
-            // if (openingDTO.DateCreated != null) opening.DateCreated = openingDTO.DateCreated; TODO: VERIFICAR SE E POSSIVEL MUDAR
-            if (openingDTO.OpenFlag != null) opening.OpenFlag = openingDTO.OpenFlag; // TODO: VERIFICAR CONDICAO QUE E SEMPRE TRUE
+            if (openingDTO.OpenFlag != opening.OpenFlag) opening.OpenFlag = openingDTO.OpenFlag;
  
             await this.db.SaveChangesAsync();
             return Ok(this.mapper.Map<OpeningDTO>(opening));

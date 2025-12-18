@@ -71,8 +71,7 @@ namespace RhManagementApi.Services
 
         public (string token, DateTime expires) CreateRefreshToken()
         {
-            // Generate a strong opaque token
-            var bytes = RandomNumberGenerator.GetBytes(64); // 512 bits
+            var bytes = RandomNumberGenerator.GetBytes(64); 
             var token = Convert.ToBase64String(bytes);
 
             var expires = DateTime.UtcNow.AddDays(_options.RefreshTokenDays);

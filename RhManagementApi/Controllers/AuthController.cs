@@ -10,8 +10,7 @@ using RhManagementApi.DTOs;
 using RhManagementApi.Models;
 using RhManagementApi.Services;
 
-// Adjust the namespace to your project
-namespace YourApp.Api.Controllers
+namespace RhManagementApi.Api.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
@@ -40,13 +39,6 @@ namespace YourApp.Api.Controllers
             _aw = aw;
         }
 
-        // ==========================
-        // REGISTER
-        // ==========================
-        /// <summary>
-        /// Registers a new user. Assigns the default "Employee" role.
-        /// Returns access & refresh tokens.
-        /// </summary>
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
         {
@@ -72,7 +64,6 @@ namespace YourApp.Api.Controllers
             await EnsureRoleAsync("Employee");
             await _userManager.AddToRoleAsync(user, "Employee");
 
-            // Issue tokens
             var accessToken = await _tokenService.CreateAccessTokenAsync(user);
             var (refreshToken, refreshExpires) = _tokenService.CreateRefreshToken();
             await SaveRefreshTokenAsync(user.Id, refreshToken, refreshExpires);
@@ -80,12 +71,6 @@ namespace YourApp.Api.Controllers
             return Ok(new TokenResponseDTO(accessToken, refreshToken));
         }
 
-        // ==========================
-        // LOGIN
-        // ==========================
-        /// <summary>
-        /// Logs in with email/password. Returns access & refresh tokens.
-        /// </summary>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         {
@@ -103,14 +88,12 @@ namespace YourApp.Api.Controllers
             return Ok(new TokenResponseDTO(accessToken, refreshToken));
         }
 
-
         [HttpPost("update-roles")]
         public async Task<IActionResult> UpdateRoles([FromBody] UpdateRoleDTO dto)
         {
             var user = await _userManager.FindByIdAsync(dto.UserId.ToString());
             if (user == null) return NotFound($"User {dto.UserId} not found.");
 
-            // Add roles
             if (dto.AddRoles != null && dto.AddRoles.Any())
             {
                 foreach (var role in dto.AddRoles)
@@ -121,7 +104,6 @@ namespace YourApp.Api.Controllers
                 }
             }
 
-            // Remove roles
             if (dto.RemoveRoles != null && dto.RemoveRoles.Any())
             {
                 foreach (var role in dto.RemoveRoles)
@@ -142,12 +124,6 @@ namespace YourApp.Api.Controllers
             });
         }
 
-        // ==========================
-        // REFRESH
-        // ==========================
-        /// <summary>
-        /// Exchanges a valid (non-revoked) refresh token for a new access & refresh token (rotation).
-        /// </summary>
         [HttpPost("refresh")]
         public async Task<IActionResult> Refresh([FromBody] RefreshRequestDTO req)
         {
@@ -159,7 +135,6 @@ namespace YourApp.Api.Controllers
             var user = await _userManager.FindByIdAsync(entry.UserId.ToString());
             if (user is null) return Unauthorized();
 
-            // Rotate refresh token
             entry.Revoked = true;
 
             var (newRefresh, expires) = _tokenService.CreateRefreshToken();
@@ -171,12 +146,6 @@ namespace YourApp.Api.Controllers
             return Ok(new TokenResponseDTO(access, newRefresh));
         }
 
-        // ==========================
-        // LOGOUT
-        // ==========================
-        /// <summary>
-        /// Revokes the provided refresh token (server-side logout).
-        /// </summary>
         [HttpPost("logout")]
         [Authorize] // optional: require auth to logout
         public async Task<IActionResult> Logout([FromBody] RefreshRequestDTO req)
@@ -190,12 +159,6 @@ namespace YourApp.Api.Controllers
             return Ok();
         }
 
-        // ==========================
-        // ME
-        // ==========================
-        /// <summary>
-        /// Returns the current user's basic info as present in the JWT.
-        /// </summary>
         [HttpGet("me")]
         [Authorize]
         public IActionResult Me()
@@ -215,10 +178,6 @@ namespace YourApp.Api.Controllers
                 roles
             });
         }
-
-        // ==========================
-        // Helpers
-        // ==========================
 
         private async Task EnsureRoleAsync(string roleName)
         {

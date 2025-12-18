@@ -3,12 +3,39 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using RhManagementApi.Data;
+using RhManagementApi.Middleware;
 using RhManagementApi.Models;
 using RhManagementApi.Services;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)         
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .Enrich.WithEnvironmentName()
+    .Enrich.WithMachineName()
+    .Enrich.WithProcessId()
+    .Enrich.WithThreadId()
+    .WriteTo.Console(theme: AnsiConsoleTheme.Code)                      
+    .WriteTo.File(
+        path: "Logs/api-.log",
+        rollingInterval: RollingInterval.Day,
+        retainedFileCountLimit: 14,
+        fileSizeLimitBytes: 50_000_000,
+        rollOnFileSizeLimit: true,
+        shared: false,
+        restrictedToMinimumLevel: LogEventLevel.Information)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // Controllers
 builder.Services.AddControllers();
@@ -126,7 +153,20 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
-// 🔹 Swagger ALWAYS ON
+app.UseMiddleware<RequestLoggingMiddleware>();
+
+app.UseSerilogRequestLogging(options =>
+{
+    options.GetLevel = (httpContext, elapsedMs, ex) =>
+        ex is null ? LogEventLevel.Information : LogEventLevel.Error;
+
+    options.EnrichDiagnosticContext = (diag, httpContext) =>
+    {
+        var query = httpContext.Request.QueryString.HasValue ? httpContext.Request.QueryString.Value : string.Empty;
+        diag.Set("QueryString", query);
+    };
+});
+
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -139,7 +179,6 @@ app.UseSwaggerUI(c =>
 app.UseHttpsRedirection();
 app.UseCors("Frontend");
 
-// Correct order
 app.UseAuthentication();
 app.UseAuthorization();
 

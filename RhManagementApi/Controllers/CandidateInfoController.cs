@@ -78,7 +78,6 @@ namespace RhManagementApi.Controllers
             return CreatedAtAction(nameof(Get), new { id = candidate.JobCandidateID }, readCandidateDTO);
         }
  
- 
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch(int id, CandidateInfoDTO candidateDTO)
         {

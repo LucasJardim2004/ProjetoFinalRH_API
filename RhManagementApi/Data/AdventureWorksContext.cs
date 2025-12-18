@@ -53,6 +53,7 @@ public partial class AdventureWorksContext : DbContext
             entity.HasOne(d => d.Opening)
                 .WithMany()
                 .HasForeignKey(d => d.OpeningID);
+
         });
 
         modelBuilder.Entity<Department>(entity =>
