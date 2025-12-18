@@ -1,4 +1,3 @@
-
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,7 +22,6 @@ builder.Services.AddDbContext<AuthDbContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks"), sql =>
         sql.MigrationsHistoryTable("__EFMigrationsHistory", "auth")));
 
-// Identity Core (int keys)
 builder.Services
     .AddIdentityCore<User>(options =>
     {
@@ -37,7 +35,6 @@ builder.Services
     .AddEntityFrameworkStores<AuthDbContext>()
     .AddSignInManager();
 
-// ✅ Bind JwtOptions from "Jwt" and validate on start
 builder.Services
     .AddOptions<JwtOptions>()
     .Bind(builder.Configuration.GetSection("Jwt"))
@@ -80,7 +77,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("fullPermission", p =>
-        p.RequireRole("RH", "Admin")
+        p.RequireRole("RH")
          .RequireClaim("business_entity_id"));
 });
 

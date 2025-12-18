@@ -22,7 +22,7 @@ namespace YourApp.Api.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly TokenService _tokenService;
         private readonly AuthDbContext _authDb;
-        private readonly AdventureWorksContext _aw; // Optional: only needed if you validate BusinessEntityID against AW
+        private readonly AdventureWorksContext _aw; 
 
         public AuthController(
             UserManager<User> userManager,
@@ -30,7 +30,7 @@ namespace YourApp.Api.Controllers
             SignInManager<User> signInManager,
             TokenService tokenService,
             AuthDbContext authDb,
-            AdventureWorksContext aw) // remove if not validating against AW
+            AdventureWorksContext aw) 
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -50,7 +50,6 @@ namespace YourApp.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
         {
-            // Optional: validate BusinessEntityID exists in AdventureWorks Employee table
             if (dto.BusinessEntityID is int beId)
             {
                 var exists = await _aw.Employees.AnyAsync(e => e.BusinessEntityID == beId);
@@ -70,7 +69,6 @@ namespace YourApp.Api.Controllers
             var result = await _userManager.CreateAsync(user, dto.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
 
-            // Assign a default role (Employee). You can change based on your workflow.
             await EnsureRoleAsync("Employee");
             await _userManager.AddToRoleAsync(user, "Employee");
 

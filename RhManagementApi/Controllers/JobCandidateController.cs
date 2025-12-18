@@ -92,7 +92,7 @@ namespace RhManagementApi.Controllers
             if (string.IsNullOrWhiteSpace(nationalId))
                 return BadRequest("National ID is required.");
 
-            // Pasta onde vamos guardar os CVs (ex: /ProjetoFinalRH_API/CvFiles)
+            // Pasta onde vamos guardar os CVs (/RHManagementApi/CvFiles)
             var uploadsFolder = Path.Combine(ContentRootPath, "CvFiles");
             if (!Directory.Exists(uploadsFolder))
             {
@@ -103,7 +103,7 @@ namespace RhManagementApi.Controllers
             var extension = Path.GetExtension(file.FileName);
             if (string.IsNullOrWhiteSpace(extension))
             {
-                extension = ".pdf"; // fallback
+                extension = ".pdf";
             }
 
             // Nome final do ficheiro: nationalId + extensão
