@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RhManagementApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de96edfacf9e9cd5860096bd5c73fbc84cce8ca5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+665787f2600b1050c5e8c00a83a069e13532ab24")]
 [assembly: System.Reflection.AssemblyProductAttribute("RhManagementApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RhManagementApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
