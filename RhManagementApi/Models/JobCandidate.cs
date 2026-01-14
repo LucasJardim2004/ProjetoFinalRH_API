@@ -22,5 +22,9 @@ public partial class JobCandidate
 
     public string? ResumeFile { get; set; }
 
+    public byte[]? CVFile { get; set; }
+
+    public string? CVFileName { get; set; }
+
     public virtual Employee? BusinessEntity { get; set; }
 }

@@ -83,21 +83,11 @@ namespace RhManagementApi.Controllers
             return NoContent();
         }
 
-        [HttpPost("upload-cv")]
-        public async Task<IActionResult> UploadCv([FromForm] IFormFile file, [FromForm] string nationalId)
+        [HttpPost("upload-cv/{jobCandidateID}")]
+        public async Task<IActionResult> UploadCv(int jobCandidateID, [FromForm] IFormFile file)
         {
             if (file == null || file.Length == 0)
                 return BadRequest("No file uploaded.");
-
-            if (string.IsNullOrWhiteSpace(nationalId))
-                return BadRequest("National ID is required.");
-
-            // Pasta onde vamos guardar os CVs (/RHManagementApi/CvFiles)
-            var uploadsFolder = Path.Combine(ContentRootPath, "CvFiles");
-            if (!Directory.Exists(uploadsFolder))
-            {
-                Directory.CreateDirectory(uploadsFolder);
-            }
 
             // Extensão original (.pdf, .doc, etc.)
             var extension = Path.GetExtension(file.FileName);
@@ -106,36 +96,50 @@ namespace RhManagementApi.Controllers
                 extension = ".pdf";
             }
 
-            // Nome final do ficheiro: nationalId + extensão
-            var safeNationalId = nationalId.Trim();
-            var newFileName = $"{safeNationalId}{extension}".Replace(" ", "_");
+            // Naming convention: originalfilename_currentdate_newguid
+            var originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(file.FileName);
+            var cleanFileName = originalFileNameWithoutExtension
+                .Replace(" ", "_")
+                .ToLower();
+            var currentDate = DateTime.Now.ToString("yyyyMMdd");
+            var newGuid = Guid.NewGuid().ToString();
+            var newFileName = $"{cleanFileName}_{currentDate}_{newGuid}{extension}";
 
-            var fullPath = Path.Combine(uploadsFolder, newFileName);
-
-            // Gravar ficheiro no disco
-            using (var stream = new FileStream(fullPath, FileMode.Create))
+            // Read file bytes
+            using (var memoryStream = new MemoryStream())
             {
-                await file.CopyToAsync(stream);
+                await file.CopyToAsync(memoryStream);
+                var fileBytes = memoryStream.ToArray();
+
+                // Find JobCandidate and update CVFile and CVFileName
+                var jobCandidate = await this.db.JobCandidates.FindAsync(jobCandidateID);
+                if (jobCandidate == null)
+                    return NotFound("Job candidate not found.");
+
+                jobCandidate.CVFile = fileBytes;
+                jobCandidate.CVFileName = newFileName;
+
+                await this.db.SaveChangesAsync();
             }
 
-            // Devolver só o nome para guardar em ResumeFile
+            // // Devolver só o nome para guardar em ResumeFile
             return Ok(new { fileName = newFileName });
         }
 
-        [HttpGet("download-cv/{fileName}")]
-        public IActionResult DownloadCv(string fileName)
-        {
-            if (string.IsNullOrWhiteSpace(fileName))
-                return BadRequest("File name is required.");
+        // [HttpGet("download-cv/{fileName}")]
+        // public IActionResult DownloadCv(string fileName)
+        // {
+        //     if (string.IsNullOrWhiteSpace(fileName))
+        //         return BadRequest("File name is required.");
 
-            var uploadsFolder = Path.Combine(ContentRootPath, "CvFiles");
-            var fullPath = Path.Combine(uploadsFolder, fileName);
+        //     var uploadsFolder = Path.Combine(ContentRootPath, "CvFiles");
+        //     var fullPath = Path.Combine(uploadsFolder, fileName);
 
-            if (!System.IO.File.Exists(fullPath))
-                return NotFound();
+        //     if (!System.IO.File.Exists(fullPath))
+        //         return NotFound();
 
-            const string contentType = "application/octet-stream";
-            return PhysicalFile(fullPath, contentType, fileName);
-        }
+        //     const string contentType = "application/octet-stream";
+        //     return PhysicalFile(fullPath, contentType, fileName);
+        // }
     }
 }
