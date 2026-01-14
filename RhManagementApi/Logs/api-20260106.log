@@ -390,3 +390,529 @@
 2026-01-06 14:47:48.008 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.2465 ms
 2026-01-06 15:59:22.781 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 12.6577 ms
 2026-01-06 15:59:22.785 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 1.6453 ms
+2026-01-06 16:17:09.281 +00:00 [WRN] Failed to determine the https port for redirect.
+2026-01-06 16:17:09.328 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/login responded 204 in 62.0920 ms
+2026-01-06 16:17:11.181 +00:00 [INF] HTTP POST /api/v1/Auth/login responded 200 in 1810.0292 ms
+2026-01-06 16:17:11.201 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.8762 ms
+2026-01-06 16:17:11.272 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 67.6340 ms
+2026-01-06 16:17:11.277 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21816 responded 204 in 0.1093 ms
+2026-01-06 16:17:11.517 +00:00 [WRN] No store type was specified for the decimal property 'Rate' on entity type 'EmployeePayHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-06 16:17:11.597 +00:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-01-06 16:17:11.960 +00:00 [INF] HTTP GET /api/v1/Employee/21816 responded 200 in 679.5368 ms
+2026-01-06 16:24:45.831 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/logout responded 204 in 0.6249 ms
+2026-01-06 16:24:45.976 +00:00 [INF] HTTP POST /api/v1/Auth/logout responded 200 in 142.3864 ms
+2026-01-06 16:25:07.736 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 77.1075 ms
+2026-01-06 16:25:07.809 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 70.6560 ms
+2026-01-06 16:25:30.581 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 5.4064 ms
+2026-01-06 16:25:30.585 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.2490 ms
+2026-01-06 16:26:17.464 +00:00 [INF] HTTP POST /api/v1/JobCandidate/upload-cv responded 200 in 36.8712 ms
+2026-01-06 16:26:17.468 +00:00 [INF] HTTP OPTIONS /api/v1/JobCandidate responded 204 in 0.0855 ms
+2026-01-06 16:26:17.582 +00:00 [INF] HTTP POST /api/v1/JobCandidate responded 201 in 111.3580 ms
+2026-01-06 16:26:17.585 +00:00 [INF] HTTP OPTIONS /api/v1/CandidateInfo responded 204 in 0.0715 ms
+2026-01-06 16:26:17.660 +00:00 [INF] HTTP POST /api/v1/CandidateInfo responded 201 in 72.8019 ms
+2026-01-06 16:29:29.803 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 16.5605 ms
+2026-01-06 16:29:29.808 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.0897 ms
+2026-01-06 16:30:18.667 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/login responded 204 in 0.4488 ms
+2026-01-06 16:30:18.799 +00:00 [INF] HTTP POST /api/v1/Auth/login responded 200 in 129.1100 ms
+2026-01-06 16:30:18.811 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0845 ms
+2026-01-06 16:30:18.815 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 2.2822 ms
+2026-01-06 16:30:18.828 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21815 responded 204 in 0.0788 ms
+2026-01-06 16:30:18.861 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 31.2945 ms
+2026-01-06 16:33:40.814 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.1386 ms
+2026-01-06 16:33:40.814 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.1389 ms
+2026-01-06 16:33:40.817 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0969 ms
+2026-01-06 16:33:40.817 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0376 ms
+2026-01-06 16:33:40.820 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.2690 ms
+2026-01-06 16:33:40.823 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.2987 ms
+2026-01-06 16:33:40.825 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.0683 ms
+2026-01-06 16:33:40.828 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.9810 ms
+2026-01-06 16:33:40.839 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21815 responded 204 in 0.0981 ms
+2026-01-06 16:33:40.877 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 36.2718 ms
+2026-01-06 16:33:42.640 +00:00 [INF] HTTP OPTIONS /api/v1/Opening responded 204 in 0.3241 ms
+2026-01-06 16:33:42.656 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 13.0338 ms
+2026-01-06 16:33:42.660 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.2634 ms
+2026-01-06 16:33:46.967 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21815 responded 204 in 0.1129 ms
+2026-01-06 16:33:46.973 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 3.6753 ms
+2026-01-06 16:33:46.983 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 7.7029 ms
+2026-01-06 16:35:50.246 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.1215 ms
+2026-01-06 16:35:50.246 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0398 ms
+2026-01-06 16:35:50.247 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0352 ms
+2026-01-06 16:35:50.247 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0383 ms
+2026-01-06 16:35:50.251 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.2374 ms
+2026-01-06 16:35:50.254 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.2166 ms
+2026-01-06 16:35:50.257 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.5704 ms
+2026-01-06 16:35:50.261 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.7932 ms
+2026-01-06 16:35:50.469 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21815 responded 204 in 0.0987 ms
+2026-01-06 16:35:50.506 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 34.1830 ms
+2026-01-06 16:35:50.512 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 4.4303 ms
+2026-01-06 16:35:53.698 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.9818 ms
+2026-01-06 16:35:53.702 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 2.7988 ms
+2026-01-06 16:35:53.704 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.0478 ms
+2026-01-06 16:35:53.706 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.1514 ms
+2026-01-06 16:35:53.725 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 6.1280 ms
+2026-01-06 16:35:55.017 +00:00 [INF] HTTP OPTIONS /api/v1/Opening responded 204 in 0.0851 ms
+2026-01-06 16:35:55.018 +00:00 [INF] HTTP OPTIONS /api/v1/Opening responded 204 in 0.0469 ms
+2026-01-06 16:35:55.023 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 3.9914 ms
+2026-01-06 16:35:55.027 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.0300 ms
+2026-01-06 16:36:02.327 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0701 ms
+2026-01-06 16:36:02.330 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.8143 ms
+2026-01-06 16:36:02.338 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.0181 ms
+2026-01-06 16:36:02.341 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.0553 ms
+2026-01-06 16:36:02.346 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 2.0882 ms
+2026-01-06 16:36:02.355 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21815 responded 204 in 0.0689 ms
+2026-01-06 16:36:02.363 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 5.5978 ms
+2026-01-06 16:36:03.814 +00:00 [INF] HTTP OPTIONS /api/v1/Opening responded 204 in 0.0815 ms
+2026-01-06 16:36:03.819 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.2110 ms
+2026-01-06 16:36:03.823 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.1143 ms
+2026-01-06 16:36:06.474 +00:00 [INF] HTTP OPTIONS /api/v1/Opening/1009 responded 204 in 0.0459 ms
+2026-01-06 16:36:06.554 +00:00 [ERR] An exception occurred in the database while saving changes for context type 'RhManagementApi.Data.AdventureWorksContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK__Candidate__Openi__041093DD". The conflict occurred in database "AdventureWorks2019", table "HumanResources.CandidateInfo", column 'OpeningID'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:06999cd2-3eb6-47c9-b121-30636b799b33
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK__Candidate__Openi__041093DD". The conflict occurred in database "AdventureWorks2019", table "HumanResources.CandidateInfo", column 'OpeningID'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:06999cd2-3eb6-47c9-b121-30636b799b33
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-01-06 16:36:06.560 +00:00 [ERR] HTTP DELETE /api/v1/Opening/1009 responded 500 in 83.1250 ms
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK__Candidate__Openi__041093DD". The conflict occurred in database "AdventureWorks2019", table "HumanResources.CandidateInfo", column 'OpeningID'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:06999cd2-3eb6-47c9-b121-30636b799b33
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at RhManagementApi.Controllers.OpeningController.Delete(Int32 id) in C:\Users\ljardim\OneDrive - Capgemini\Desktop\Formações\RH_Backend\ProjetoFinalRH_API\RhManagementApi\Controllers\OpeningController.cs:line 96
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-01-06 16:36:06.574 +00:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK__Candidate__Openi__041093DD". The conflict occurred in database "AdventureWorks2019", table "HumanResources.CandidateInfo", column 'OpeningID'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:06999cd2-3eb6-47c9-b121-30636b799b33
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at RhManagementApi.Controllers.OpeningController.Delete(Int32 id) in C:\Users\ljardim\OneDrive - Capgemini\Desktop\Formações\RH_Backend\ProjetoFinalRH_API\RhManagementApi\Controllers\OpeningController.cs:line 96
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at RhManagementApi.Middleware.RequestLoggingMiddleware.Invoke(HttpContext context) in C:\Users\ljardim\OneDrive - Capgemini\Desktop\Formações\RH_Backend\ProjetoFinalRH_API\RhManagementApi\Middleware\RequestLoggingMiddleware.cs:line 54
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-01-06 16:36:10.051 +00:00 [ERR] An exception occurred in the database while saving changes for context type 'RhManagementApi.Data.AdventureWorksContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK__Candidate__Openi__041093DD". The conflict occurred in database "AdventureWorks2019", table "HumanResources.CandidateInfo", column 'OpeningID'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:06999cd2-3eb6-47c9-b121-30636b799b33
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK__Candidate__Openi__041093DD". The conflict occurred in database "AdventureWorks2019", table "HumanResources.CandidateInfo", column 'OpeningID'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:06999cd2-3eb6-47c9-b121-30636b799b33
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-01-06 16:36:10.055 +00:00 [ERR] HTTP DELETE /api/v1/Opening/1009 responded 500 in 11.2107 ms
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK__Candidate__Openi__041093DD". The conflict occurred in database "AdventureWorks2019", table "HumanResources.CandidateInfo", column 'OpeningID'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:06999cd2-3eb6-47c9-b121-30636b799b33
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at RhManagementApi.Controllers.OpeningController.Delete(Int32 id) in C:\Users\ljardim\OneDrive - Capgemini\Desktop\Formações\RH_Backend\ProjetoFinalRH_API\RhManagementApi\Controllers\OpeningController.cs:line 96
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-01-06 16:36:10.062 +00:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK__Candidate__Openi__041093DD". The conflict occurred in database "AdventureWorks2019", table "HumanResources.CandidateInfo", column 'OpeningID'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:06999cd2-3eb6-47c9-b121-30636b799b33
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at RhManagementApi.Controllers.OpeningController.Delete(Int32 id) in C:\Users\ljardim\OneDrive - Capgemini\Desktop\Formações\RH_Backend\ProjetoFinalRH_API\RhManagementApi\Controllers\OpeningController.cs:line 96
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at RhManagementApi.Middleware.RequestLoggingMiddleware.Invoke(HttpContext context) in C:\Users\ljardim\OneDrive - Capgemini\Desktop\Formações\RH_Backend\ProjetoFinalRH_API\RhManagementApi\Middleware\RequestLoggingMiddleware.cs:line 54
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-01-06 16:36:17.679 +00:00 [INF] HTTP OPTIONS /api/v1/Opening responded 204 in 0.0683 ms
+2026-01-06 16:36:17.679 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0228 ms
+2026-01-06 16:36:17.680 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0192 ms
+2026-01-06 16:36:17.683 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7476 ms
+2026-01-06 16:36:17.684 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.1467 ms
+2026-01-06 16:36:17.685 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.9460 ms
+2026-01-06 16:36:17.688 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7670 ms
+2026-01-06 16:36:17.688 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.3582 ms
+2026-01-06 16:36:17.693 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 2.0616 ms
+2026-01-06 16:36:18.806 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7101 ms
+2026-01-06 16:36:18.807 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.2616 ms
+2026-01-06 16:36:18.809 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7756 ms
+2026-01-06 16:36:18.813 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5935 ms
+2026-01-06 16:36:18.814 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.4333 ms
+2026-01-06 16:36:18.816 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.9119 ms
+2026-01-06 16:36:22.705 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0394 ms
+2026-01-06 16:36:22.708 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.9670 ms
+2026-01-06 16:36:22.711 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6818 ms
+2026-01-06 16:36:22.713 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6864 ms
+2026-01-06 16:36:22.715 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6095 ms
+2026-01-06 16:36:22.731 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21815 responded 204 in 0.0532 ms
+2026-01-06 16:36:22.738 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 3.9669 ms
+2026-01-06 16:36:23.860 +00:00 [INF] HTTP OPTIONS /api/v1/Opening responded 204 in 0.0607 ms
+2026-01-06 16:36:23.864 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 1.8092 ms
+2026-01-06 16:36:23.868 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.4682 ms
+2026-01-06 16:36:55.427 +00:00 [INF] HTTP OPTIONS /api/v1/Opening responded 204 in 0.0454 ms
+2026-01-06 16:36:55.428 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0266 ms
+2026-01-06 16:36:55.428 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0165 ms
+2026-01-06 16:36:55.432 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 2.4450 ms
+2026-01-06 16:36:55.436 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.4355 ms
+2026-01-06 16:36:55.438 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 8.4229 ms
+2026-01-06 16:36:55.439 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.9695 ms
+2026-01-06 16:36:55.442 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5571 ms
+2026-01-06 16:36:55.443 +00:00 [INF] HTTP GET /api/v1/Opening responded 200 in 2.2542 ms
+2026-01-06 16:39:04.403 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21815 responded 204 in 0.0486 ms
+2026-01-06 16:39:04.403 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21815 responded 204 in 0.0357 ms
+2026-01-06 16:39:04.442 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 35.5876 ms
+2026-01-06 16:39:04.446 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 3.6880 ms
+2026-01-06 16:39:05.745 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/logout responded 204 in 0.0645 ms
+2026-01-06 16:39:05.764 +00:00 [INF] HTTP POST /api/v1/Auth/logout responded 200 in 16.8929 ms
+2026-01-06 16:39:19.634 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/login responded 204 in 0.0539 ms
+2026-01-06 16:39:19.743 +00:00 [INF] HTTP POST /api/v1/Auth/login responded 200 in 107.2025 ms
+2026-01-06 16:39:19.756 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0430 ms
+2026-01-06 16:39:19.759 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6414 ms
+2026-01-06 16:39:19.771 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21816 responded 204 in 0.0701 ms
+2026-01-06 16:39:19.777 +00:00 [INF] HTTP GET /api/v1/Employee/21816 responded 200 in 3.3348 ms
+2026-01-06 16:39:45.640 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0474 ms
+2026-01-06 16:39:45.640 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0256 ms
+2026-01-06 16:39:45.642 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0405 ms
+2026-01-06 16:39:45.643 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4974 ms
+2026-01-06 16:39:45.645 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.3260 ms
+2026-01-06 16:39:45.646 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4044 ms
+2026-01-06 16:39:45.648 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7268 ms
+2026-01-06 16:39:56.484 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0394 ms
+2026-01-06 16:39:56.485 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0213 ms
+2026-01-06 16:39:56.485 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0242 ms
+2026-01-06 16:39:56.488 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6648 ms
+2026-01-06 16:39:56.490 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4086 ms
+2026-01-06 16:39:56.491 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4471 ms
+2026-01-06 16:39:56.493 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5680 ms
+2026-01-06 16:39:56.502 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21816 responded 204 in 0.0488 ms
+2026-01-06 16:39:56.535 +00:00 [INF] HTTP GET /api/v1/Employee/21816 responded 200 in 31.2893 ms
+2026-01-06 16:40:05.299 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0446 ms
+2026-01-06 16:40:05.301 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0265 ms
+2026-01-06 16:40:05.301 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0307 ms
+2026-01-06 16:40:05.302 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4918 ms
+2026-01-06 16:40:05.304 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.3941 ms
+2026-01-06 16:40:05.305 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4712 ms
+2026-01-06 16:40:05.308 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4522 ms
+2026-01-06 16:40:07.857 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.9266 ms
+2026-01-06 16:40:07.859 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5243 ms
+2026-01-06 16:40:07.860 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4001 ms
+2026-01-06 16:40:07.862 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5670 ms
+2026-01-06 16:40:46.786 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0640 ms
+2026-01-06 16:40:46.786 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0089 ms
+2026-01-06 16:40:46.787 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0210 ms
+2026-01-06 16:40:46.787 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0145 ms
+2026-01-06 16:40:46.790 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7174 ms
+2026-01-06 16:40:46.792 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5421 ms
+2026-01-06 16:40:46.794 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7425 ms
+2026-01-06 16:40:46.797 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.2472 ms
+2026-01-06 16:40:46.805 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21816 responded 204 in 0.0480 ms
+2026-01-06 16:40:46.840 +00:00 [INF] HTTP GET /api/v1/Employee/21816 responded 200 in 33.2613 ms
+2026-01-06 16:41:04.427 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0651 ms
+2026-01-06 16:41:04.428 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0300 ms
+2026-01-06 16:41:04.429 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0168 ms
+2026-01-06 16:41:04.433 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 2.1100 ms
+2026-01-06 16:41:04.435 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5337 ms
+2026-01-06 16:41:04.437 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6815 ms
+2026-01-06 16:41:04.439 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7803 ms
+2026-01-06 16:42:49.297 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0439 ms
+2026-01-06 16:42:49.301 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.0351 ms
+2026-01-06 16:42:49.313 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6198 ms
+2026-01-06 16:42:49.317 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.9691 ms
+2026-01-06 16:42:49.322 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6442 ms
+2026-01-06 16:44:47.887 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0974 ms
+2026-01-06 16:44:47.893 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.7804 ms
+2026-01-06 16:44:47.897 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6777 ms
+2026-01-06 16:44:47.900 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7328 ms
+2026-01-06 16:44:47.903 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.8516 ms
+2026-01-06 16:44:47.946 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21816 responded 204 in 0.1421 ms
+2026-01-06 16:44:47.997 +00:00 [INF] HTTP GET /api/v1/Employee/21816 responded 200 in 45.0009 ms
+2026-01-06 16:44:51.496 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/logout responded 204 in 0.0499 ms
+2026-01-06 16:44:51.509 +00:00 [INF] HTTP POST /api/v1/Auth/logout responded 200 in 10.3866 ms
+2026-01-06 16:45:06.340 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/login responded 204 in 0.0414 ms
+2026-01-06 16:45:06.442 +00:00 [INF] HTTP POST /api/v1/Auth/login responded 200 in 97.9534 ms
+2026-01-06 16:45:06.455 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0447 ms
+2026-01-06 16:45:06.457 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4759 ms
+2026-01-06 16:45:06.469 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21816 responded 204 in 0.0457 ms
+2026-01-06 16:45:06.474 +00:00 [INF] HTTP GET /api/v1/Employee/21816 responded 200 in 3.3706 ms
+2026-01-06 16:45:24.720 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/logout responded 204 in 0.0587 ms
+2026-01-06 16:45:24.740 +00:00 [INF] HTTP POST /api/v1/Auth/logout responded 200 in 16.7589 ms
+2026-01-06 16:45:31.797 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/login responded 204 in 0.0423 ms
+2026-01-06 16:45:31.898 +00:00 [INF] HTTP POST /api/v1/Auth/login responded 200 in 98.2197 ms
+2026-01-06 16:45:31.911 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0441 ms
+2026-01-06 16:45:31.914 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5242 ms
+2026-01-06 16:45:31.928 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/21815 responded 204 in 0.0397 ms
+2026-01-06 16:45:31.957 +00:00 [INF] HTTP GET /api/v1/Employee/21815 responded 200 in 26.1658 ms
+2026-01-06 16:45:36.645 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 1.2869 ms
+2026-01-06 16:45:36.648 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5356 ms
+2026-01-06 16:45:36.650 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5887 ms
+2026-01-06 16:45:36.652 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5953 ms
+2026-01-06 16:45:36.670 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/1 responded 204 in 0.0468 ms
+2026-01-06 16:45:36.704 +00:00 [INF] HTTP GET /api/v1/Employee/1 responded 200 in 32.4388 ms
+2026-01-06 16:45:59.058 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0361 ms
+2026-01-06 16:45:59.059 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0494 ms
+2026-01-06 16:45:59.061 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6312 ms
+2026-01-06 16:45:59.063 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6810 ms
+2026-01-06 16:45:59.065 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5796 ms
+2026-01-06 16:45:59.067 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4570 ms
+2026-01-06 16:45:59.080 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/2 responded 204 in 0.0514 ms
+2026-01-06 16:45:59.095 +00:00 [INF] HTTP GET /api/v1/Employee/2 responded 200 in 12.6906 ms
+2026-01-06 16:46:14.201 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0575 ms
+2026-01-06 16:46:14.201 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0319 ms
+2026-01-06 16:46:14.204 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4424 ms
+2026-01-06 16:46:14.206 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5470 ms
+2026-01-06 16:46:14.208 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.8669 ms
+2026-01-06 16:46:14.210 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5557 ms
+2026-01-06 16:48:11.675 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0373 ms
+2026-01-06 16:48:11.675 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0374 ms
+2026-01-06 16:48:11.679 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6592 ms
+2026-01-06 16:48:11.681 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4706 ms
+2026-01-06 16:48:11.683 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.6750 ms
+2026-01-06 16:48:11.685 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7419 ms
+2026-01-06 16:48:11.694 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/2 responded 204 in 0.0388 ms
+2026-01-06 16:48:11.727 +00:00 [INF] HTTP GET /api/v1/Employee/2 responded 200 in 30.3846 ms
+2026-01-06 17:00:09.450 +00:00 [INF] HTTP OPTIONS /api/v1/Auth/me responded 204 in 0.0595 ms
+2026-01-06 17:00:09.567 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.7452 ms
+2026-01-06 17:00:09.587 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5019 ms
+2026-01-06 17:00:09.591 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.4763 ms
+2026-01-06 17:00:09.600 +00:00 [INF] HTTP GET /api/v1/Auth/me responded 200 in 0.5483 ms
+2026-01-06 17:00:09.609 +00:00 [INF] HTTP OPTIONS /api/v1/Employee/2 responded 204 in 0.0485 ms
+2026-01-06 17:00:09.911 +00:00 [INF] HTTP GET /api/v1/Employee/2 responded 200 in 292.1401 ms

@@ -6217,11 +6217,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\Formações\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\RhManagementApi.csproj",
+      "projectUniqueName": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\RhManagementApi.csproj",
       "projectName": "RhManagementApi",
-      "projectPath": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\Formações\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\RhManagementApi.csproj",
+      "projectPath": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\RhManagementApi.csproj",
       "packagesPath": "C:\\Users\\ljardim\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\Formações\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\obj\\",
+      "outputPath": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ljardim\\AppData\\Roaming\\NuGet\\NuGet.Config"

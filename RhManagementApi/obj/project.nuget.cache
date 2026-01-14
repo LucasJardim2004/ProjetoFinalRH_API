@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VrkEmRAEa9A=",
+  "dgSpecHash": "j934Nkjk7TU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\Formações\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\RhManagementApi.csproj",
+  "projectFilePath": "C:\\Users\\ljardim\\OneDrive - Capgemini\\Desktop\\RH_Backend\\ProjetoFinalRH_API\\RhManagementApi\\RhManagementApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ljardim\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ljardim\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

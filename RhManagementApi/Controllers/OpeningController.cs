@@ -74,7 +74,7 @@ namespace RhManagementApi.Controllers
             if (openingDTO.Description != null) opening.Description = openingDTO.Description;
 
             // assuming OpeningDTO.OpenFlag is bool? and Opening.OpenFlag is bool
-            if (openingDTO.OpenFlag.HasValue) opening.OpenFlag = openingDTO.OpenFlag.Value;
+            if (openingDTO.OpenFlag != opening.OpenFlag) opening.OpenFlag = openingDTO.OpenFlag;
 
             await db.SaveChangesAsync();
             return Ok(mapper.Map<OpeningDTO>(opening));
@@ -88,7 +88,7 @@ namespace RhManagementApi.Controllers
             if (opening == null) return NotFound();
 
             // proactive block if there are related candidates/applications
-            var hasCandidates = await db.CandidateInfo.AnyAsync(ci => ci.OpeningID == id);
+            var hasCandidates = await db.CandidateInfos.AnyAsync(ci => ci.OpeningID == id);
             if (hasCandidates)
             {
                 return Conflict(new
