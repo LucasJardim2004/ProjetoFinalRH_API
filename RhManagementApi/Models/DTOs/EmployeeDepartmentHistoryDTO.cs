@@ -24,6 +24,8 @@ namespace RhManagementApi.DTOs
         /// </summary>
         public DateTime? EndDate { get; set; }
 
-        public virtual Department? Department { get; set; }
+        //public virtual Department? Department { get; set; }
+
+        public string DepartmentName { get; set; }
     }
 }

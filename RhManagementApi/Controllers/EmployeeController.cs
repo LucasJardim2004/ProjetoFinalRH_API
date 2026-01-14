@@ -38,15 +38,11 @@ namespace RhManagementApi.Controllers
             // 1) Load Employee with its own relationships
             var employee = await db.Employees
                 .Include(e => e.EmployeeDepartmentHistories)
+                    .ThenInclude(h => h.Department)
                 .Include(e => e.EmployeePayHistories)
                 .FirstOrDefaultAsync(e => e.BusinessEntityID == id);
  
             if (employee == null) return NotFound();
- 
-            // 2) Load single phone and single email by BusinessEntityID
-            // Use your actual DbSet property names here:
-            // - If it's db.PersonPhones, change db.Phones to db.PersonPhones
-            // - If it's db.PersonEmailAddresses, change db.EmailAddresses accordingly
  
             var phoneNumber = await db.PeoplePhones
                 .Where(ph => ph.BusinessEntityID == id)
@@ -57,7 +53,13 @@ namespace RhManagementApi.Controllers
                 .Where(em => em.BusinessEntityID == id)
                 .Select(em => em.EmailAddress)
                 .FirstOrDefaultAsync();
- 
+
+            
+            var person = await db.People
+                .Where(p => p.BusinessEntityID == id)
+                .Select(p => new {p.FirstName, p.LastName})
+                .FirstOrDefaultAsync();
+
             // 3) Map employee to DTO and attach single phone/email
             var dto = this.mapper.Map<EmployeeDTO>(employee);
  
@@ -69,7 +71,9 @@ namespace RhManagementApi.Controllers
             {
                 Employee = dto,
                 PhoneNumber = phoneNumber,
-                EmailAddress = emailAddress
+                EmailAddress = emailAddress,
+                FirstName = person?.FirstName,
+                LastName = person?.LastName
             });
  
         }
