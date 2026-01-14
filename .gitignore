@@ -1,0 +1,16 @@
+RhManagementApi/appsettings.json
+RhManagementApi/appsettings.json
+RhManagementApi/bin/Debug/net9.0/appsettings.json
+RhManagementApi/bin/Debug/net9.0/RhManagementApi.dll
+*.pdb
+*.log
+RhManagementApi/obj/Debug/net9.0/apphost.exe
+RhManagementApi/obj/Debug/net9.0/refint/RhManagementApi.dll
+RhManagementApi/obj/Debug/net9.0/RhManagementApi.AssemblyInfo.cs
+RhManagementApi/obj/Debug/net9.0/RhManagementApi.AssemblyInfoInputs.cache
+RhManagementApi/obj/Debug/net9.0/RhManagementApi.assets.cache
+RhManagementApi/obj/Debug/net9.0/RhManagementApi.csproj.AssemblyReference.cache
+RhManagementApi/obj/Debug/net9.0/RhManagementApi.csproj.CoreCompileInputs.cache
+RhManagementApi/obj/Debug/net9.0/RhManagementApi.dll
+RhManagementApi/obj/RhManagementApi.csproj.nuget.dgspec.json
+RhManagementApi/obj/RhManagementApi.csproj.nuget.g.props
