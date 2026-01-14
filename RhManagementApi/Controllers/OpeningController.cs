@@ -54,30 +54,28 @@ namespace RhManagementApi.Controllers
             return CreatedAtAction(nameof(Get), new { id = opening.OpeningID }, readOpeningDTO);
         }
 
-        [HttpPatch("{id}")]
-        // [Authorize(Policy = "fullPermission")]
         public async Task<IActionResult> Patch(int id, OpeningDTO openingDTO)
         {
             if (id != openingDTO.OpeningID) return BadRequest();
-
+ 
             if (openingDTO.DateCreated.HasValue)
             {
                 var dateCreated = openingDTO.DateCreated.Value;
                 if (dateCreated <= DateTime.MinValue || dateCreated >= DateTime.MaxValue)
-                    return BadRequest("DateCreated is out of range.");
+                    return BadRequest("StartDate is out of range.");
             }
-
-            var opening = await db.Openings.FirstOrDefaultAsync(e => e.OpeningID == id);
+ 
+            var opening = await this.db.Openings
+                .FirstOrDefaultAsync(e => e.OpeningID == id);
+ 
             if (opening == null) return NotFound();
-
+ 
             if (openingDTO.JobTitle != null) opening.JobTitle = openingDTO.JobTitle;
             if (openingDTO.Description != null) opening.Description = openingDTO.Description;
-
-            // assuming OpeningDTO.OpenFlag is bool? and Opening.OpenFlag is bool
             if (openingDTO.OpenFlag != opening.OpenFlag) opening.OpenFlag = openingDTO.OpenFlag;
-
-            await db.SaveChangesAsync();
-            return Ok(mapper.Map<OpeningDTO>(opening));
+ 
+            await this.db.SaveChangesAsync();
+            return Ok(this.mapper.Map<OpeningDTO>(opening));
         }
 
         [HttpDelete("{id}")]
