@@ -19,16 +19,29 @@ namespace RhManagementApi.Controllers
             this.mapper = mapper;
         }
  
+        
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get (int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var employeeDepartmentHistories = await this.db.EmployeeDepartmentHistories.Where(e => e.BusinessEntityID == id).ToListAsync();
-            if (employeeDepartmentHistories == null) return NotFound();
- 
-            var EmployeeDepartmentHistoriesDTO = this.mapper.Map<List<EmployeeDepartmentHistoryDTO>>(employeeDepartmentHistories);
- 
-            return Ok(EmployeeDepartmentHistoriesDTO);
+            var histories = await db.EmployeeDepartmentHistories
+                .Where(e => e.BusinessEntityID == id)
+                .Include(e => e.Department)
+                .Select(e => new EmployeeDepartmentHistoryDTO
+                {
+                    BusinessEntityID = e.BusinessEntityID,
+                    DepartmentID = e.DepartmentID,
+                    StartDate = e.StartDate,
+                    EndDate = e.EndDate,
+                    DepartmentName = e.Department.Name 
+                })
+                .ToListAsync();
+
+            if (!histories.Any())
+                return NotFound();
+
+            return Ok(histories);
         }
+
  
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] EmployeeDepartmentHistoryDTO dto)
