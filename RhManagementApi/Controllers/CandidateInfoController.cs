@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using RhManagementApi.Constants;
 using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using AutoMapper;
@@ -20,6 +23,7 @@ namespace RhManagementApi.Controllers
         }
  
         [HttpGet]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> GetAll()
         {
             var candidates = await this.db.CandidateInfos
@@ -29,6 +33,7 @@ namespace RhManagementApi.Controllers
         }
  
         [HttpGet("{id}")]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Get (int id)
         {
             var candidate = await this.db.CandidateInfos
@@ -41,6 +46,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpGet("by-opening/{openingId}")]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> GetByOpening(int openingId)
         {
             var candidates = await this.db.CandidateInfos
@@ -55,6 +61,7 @@ namespace RhManagementApi.Controllers
         }
  
         [HttpPost]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Create(CandidateInfoDTO candidateDTO)
         {
             if (candidateDTO.BirthDate.HasValue)
@@ -77,6 +84,7 @@ namespace RhManagementApi.Controllers
             return CreatedAtAction(nameof(Get), new { id = candidate.JobCandidateID }, readCandidateDTO);
         }
  
+        [Authorize(Policy = "HROnly")]
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch(int id, CandidateInfoDTO candidateDTO)
         {
@@ -109,7 +117,8 @@ namespace RhManagementApi.Controllers
             return Ok(this.mapper.Map<CandidateInfoDTO>(candidate));
         }
  
- 
+ [Authorize(Policy = "HROnly")]
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete (int id)
         {

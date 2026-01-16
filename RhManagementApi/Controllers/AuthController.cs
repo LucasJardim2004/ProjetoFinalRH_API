@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RhManagementApi.Constants;
 using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using RhManagementApi.Models;
@@ -61,8 +62,8 @@ namespace RhManagementApi.Api.Controllers
             var result = await _userManager.CreateAsync(user, dto.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
 
-            await EnsureRoleAsync("Employee");
-            await _userManager.AddToRoleAsync(user, "Employee");
+            await EnsureRoleAsync(RoleNames.Employee);
+            await _userManager.AddToRoleAsync(user, RoleNames.Employee);
 
             var accessToken = await _tokenService.CreateAccessTokenAsync(user);
             var (refreshToken, refreshExpires) = _tokenService.CreateRefreshToken();
@@ -89,6 +90,7 @@ namespace RhManagementApi.Api.Controllers
         }
 
         [HttpPost("update-roles")]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> UpdateRoles([FromBody] UpdateRoleDTO dto)
         {
             var user = await _userManager.FindByIdAsync(dto.UserId.ToString());

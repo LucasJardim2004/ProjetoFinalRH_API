@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using RhManagementApi.Constants;
 using RhManagementApi.Data;
 using RhManagementApi.Middleware;
 using RhManagementApi.Models;
@@ -103,9 +104,11 @@ builder.Services.AddAuthentication(options =>
 // Authorization policies
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("fullPermission", p =>
-        p.RequireRole("RH")
-         .RequireClaim("business_entity_id"));
+    options.AddPolicy("HROnly", p =>
+        p.RequireRole(RoleNames.HR));
+    
+    options.AddPolicy("EmployeeOrHR", p =>
+        p.RequireRole(RoleNames.Employee, RoleNames.HR));
 });
 
 // Swagger + JWT security

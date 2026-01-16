@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using RhManagementApi.Constants;
 using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using RhManagementApi.Models;
@@ -39,7 +40,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpPost]
-        // [Authorize(Policy = "fullPermission")]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Create(OpeningDTO openingDTO)
         {
             openingDTO.DateCreated = DateTime.Now;
@@ -54,6 +55,8 @@ namespace RhManagementApi.Controllers
             return CreatedAtAction(nameof(Get), new { id = opening.OpeningID }, readOpeningDTO);
         }
 
+        [HttpPatch("{id}")]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Patch(int id, OpeningDTO openingDTO)
         {
             if (id != openingDTO.OpeningID) return BadRequest();
@@ -79,7 +82,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        // [Authorize(Policy = "fullPermission")]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Delete(int id)
         {
             var opening = await db.Openings.FindAsync(id);

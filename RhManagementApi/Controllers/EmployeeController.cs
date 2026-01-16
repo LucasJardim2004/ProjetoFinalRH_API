@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RhManagementApi.Constants;
 using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using AutoMapper;
 using RhManagementApi.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace RhManagementApi.Controllers
 {
@@ -21,6 +23,7 @@ namespace RhManagementApi.Controllers
         }
  
         [HttpGet]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> GetAll()
         {
             var employee = await this.db.Employees
@@ -32,9 +35,16 @@ namespace RhManagementApi.Controllers
  
  
         [HttpGet("{id}")]
-        // [Authorize]
+        [Authorize(Policy = "EmployeeOrHR")]
         public async Task<IActionResult> Get(int id)
         {
+            // Employees can only view their own info; HR can view anyone
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            var userBeId = User.FindFirst("business_entity_id")?.Value;
+
+            if (userRole == RoleNames.Employee && int.TryParse(userBeId, out var currentUserBeId) && currentUserBeId != id)
+                return Forbid(); // Employee trying to view someone else's data
+
             // 1) Load Employee with its own relationships
             var employee = await db.Employees
                 .Include(e => e.EmployeeDepartmentHistories)
@@ -79,6 +89,7 @@ namespace RhManagementApi.Controllers
         }
  
         [HttpPost]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Create([FromBody] EmployeeWithPersonDTO dto)
         {
             if (dto == null) return BadRequest("Request body is required.");
@@ -200,21 +211,28 @@ namespace RhManagementApi.Controllers
                     return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to create employee and related records. {ex}");
             }
         }
- 
- 
- 
+
         [HttpPatch("{id}")]
+        [Authorize(Policy = "EmployeeOrHR")]
         public async Task<IActionResult> Patch(int id, EmployeeDTO employeeDTO)
         {
+            // Employees can only modify their own data; HR can modify anyone (but with restrictions)
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            var userBeId = User.FindFirst("business_entity_id")?.Value;
+
+            if (userRole == RoleNames.Employee && int.TryParse(userBeId, out var currentUserBeId) && currentUserBeId != id)
+                return Forbid(); // Employee trying to modify someone else's data
+            
             if (id != employeeDTO.BusinessEntityID) return BadRequest();
- 
+
+            // Validate date ranges if provided
             if (employeeDTO.HireDate.HasValue)
             {
                 var hireDate = employeeDTO.HireDate.Value;
                 if (hireDate <= DateTime.MinValue || hireDate >= DateTime.MaxValue)
                     return BadRequest("HireDate is out of range.");
             }
- 
+
             if (employeeDTO.BirthDate.HasValue)
             {
                 var birthDate = employeeDTO.BirthDate.Value;
@@ -227,12 +245,22 @@ namespace RhManagementApi.Controllers
  
             if (employee == null) return NotFound();
  
-            if (employeeDTO.JobTitle != null) employee.JobTitle = employeeDTO.JobTitle;
-            if (employeeDTO.BirthDate.HasValue) employee.BirthDate = employeeDTO.BirthDate.Value;
+            // Determine if HR is modifying their own profile
+            bool isHRModifyingOwnProfile = userRole == RoleNames.HR && int.TryParse(userBeId, out var hrBeId) && hrBeId == id;
+ 
+            // Both Employee and HR modifying own profile can only change Gender and Marital Status
+            // HR modifying someone else can change all these fields
             if (employeeDTO.Gender != null) employee.Gender = employeeDTO.Gender;
             if (employeeDTO.MaritalStatus != null) employee.MaritalStatus = employeeDTO.MaritalStatus;
-            // if (employeeDTO.OrganizationLevel != null) employee.OrganizationLevel = employeeDTO.OrganizationLevel;
-            if (employeeDTO.HireDate.HasValue) employee.HireDate = employeeDTO.HireDate.Value;
+
+            // Only HR can change these fields, and only if modifying someone else's profile
+            if (userRole == RoleNames.HR && !isHRModifyingOwnProfile)
+            {
+                if (employeeDTO.JobTitle != null) employee.JobTitle = employeeDTO.JobTitle;
+                if (employeeDTO.BirthDate.HasValue) employee.BirthDate = employeeDTO.BirthDate.Value;
+                if (employeeDTO.HireDate.HasValue) employee.HireDate = employeeDTO.HireDate.Value;
+                // if (employeeDTO.OrganizationLevel != null) employee.OrganizationLevel = employeeDTO.OrganizationLevel;
+            }
  
             await this.db.SaveChangesAsync();
             return Ok(this.mapper.Map<EmployeeDTO>(employee));

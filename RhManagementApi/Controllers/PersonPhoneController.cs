@@ -1,6 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using RhManagementApi.Constants;
 using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using RhManagementApi.Models;
@@ -20,6 +23,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Policy = "EmployeeOrHR")]
         public async Task<IActionResult> Get (int id)
         {
             var phone = await this.db.PeoplePhones
@@ -32,6 +36,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "EmployeeOrHR")]
         public async Task<IActionResult> Create(PersonPhoneDTO phoneDTO)
         {
             var phone = this.mapper.Map<PersonPhone>(phoneDTO);

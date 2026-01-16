@@ -1,6 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using RhManagementApi.Constants;
 using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using RhManagementApi.Models;
@@ -20,6 +23,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Policy = "EmployeeOrHR")]
         public async Task<IActionResult> Get (int id)
         {
             var emailAddress = await this.db.EmailAddresses
@@ -31,6 +35,7 @@ namespace RhManagementApi.Controllers
             return Ok(emailAddressDTO);
         }
 
+        [Authorize(Policy = "EmployeeOrHR")]
         [HttpPost]
         public async Task<IActionResult> Create(PersonEmailAddressDTO emailAddressDTO)
         {
@@ -42,6 +47,7 @@ namespace RhManagementApi.Controllers
             return CreatedAtAction(nameof(Get),new {Id = emailAddress.BusinessEntityID}, readEmailAddressDTO);
         }
 
+        [Authorize(Policy = "EmployeeOrHR")]
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch(int id, PersonEmailAddressDTO emailAddressDTO)
         {

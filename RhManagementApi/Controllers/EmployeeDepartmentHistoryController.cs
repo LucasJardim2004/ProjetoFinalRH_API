@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using RhManagementApi.Constants;
 using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using AutoMapper;
@@ -19,8 +22,8 @@ namespace RhManagementApi.Controllers
             this.mapper = mapper;
         }
  
-        
         [HttpGet("{id}")]
+        [Authorize(Policy = "EmployeeOrHR")]
         public async Task<IActionResult> Get(int id)
         {
             var histories = await db.EmployeeDepartmentHistories
@@ -44,6 +47,7 @@ namespace RhManagementApi.Controllers
 
  
         [HttpPost]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Create([FromBody] EmployeeDepartmentHistoryDTO dto)
         {
             if (dto == null) return BadRequest("Body is required.");
@@ -81,6 +85,7 @@ namespace RhManagementApi.Controllers
             return CreatedAtAction(nameof(Get), new { id = entity.BusinessEntityID }, readDto);
         }
        
+        [Authorize(Policy = "HROnly")]
         [HttpPatch("{id}_{startDate}")]
         public async Task<IActionResult> Patch(int id, DateTime startDate, EmployeeDepartmentHistoryDTO dto)
         {

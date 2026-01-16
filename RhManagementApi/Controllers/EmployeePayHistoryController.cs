@@ -1,6 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using RhManagementApi.Constants;
 using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using RhManagementApi.Models;
@@ -20,6 +23,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Policy = "EmployeeOrHR")]
         public async Task<IActionResult> Get (int id)
         {
             var employeePayHistory = await this.db.EmployeePayHistories.Where(e => e.BusinessEntityID == id).ToListAsync();
@@ -31,6 +35,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Create(EmployeePayHistoryDTO employeePayHistoryDTO)
         {
             if(employeePayHistoryDTO.RateChangeDate == null)
