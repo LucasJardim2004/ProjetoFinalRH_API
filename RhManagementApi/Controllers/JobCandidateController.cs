@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using RhManagementApi.Constants;
 using RhManagementApi.Data;
 using RhManagementApi.DTOs;
 using AutoMapper;
@@ -23,6 +25,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> GetAll()
         {
             var candidates = await this.db.JobCandidates
@@ -32,6 +35,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Get(int id)
         {
             var candidate = await this.db.JobCandidates
@@ -43,6 +47,7 @@ namespace RhManagementApi.Controllers
             return Ok(candidateDTO);
         }
 
+        [Authorize(Policy = "HROnly")]
         [HttpPost]
         public async Task<IActionResult> Create(JobCandidateDTO candidateDTO)
         {
@@ -55,6 +60,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpPatch("{id}")]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Patch(int id, JobCandidate candidateDTO)
         {
             if (id != candidateDTO.JobCandidateID) return BadRequest();
@@ -72,6 +78,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Delete(int id)
         {
             var candidate = await this.db.JobCandidates.FindAsync(id);
@@ -83,6 +90,7 @@ namespace RhManagementApi.Controllers
             return NoContent();
         }
 
+        [Authorize(Policy = "HROnly")]
         [HttpPost("upload-cv/{jobCandidateID}")]
         public async Task<IActionResult> UploadCv(int jobCandidateID, [FromForm] IFormFile file)
         {
