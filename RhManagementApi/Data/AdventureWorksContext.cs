@@ -12,24 +12,16 @@ public partial class AdventureWorksContext : DbContext
 
     public virtual DbSet<BusinessEntity> BusinessEntities { get; set; }
     public virtual DbSet<CandidateInfo> CandidateInfos { get; set; }
-
     public virtual DbSet<Department> Departments { get; set; }
-
     public virtual DbSet<Employee> Employees { get; set; }
-
     public virtual DbSet<EmployeeDepartmentHistory> EmployeeDepartmentHistories { get; set; }
-
     public virtual DbSet<EmployeePayHistory> EmployeePayHistories { get; set; }
-
     public virtual DbSet<JobCandidate> JobCandidates { get; set; }
-
     public virtual DbSet<Opening> Openings { get; set; }
-
     public virtual DbSet<Person> People { get; set; }
-
     public virtual DbSet<PersonEmailAddress> EmailAddresses { get; set; }
-
     public virtual DbSet<PersonPhone> PeoplePhones { get; set; }
+    public virtual DbSet<Notification> Notifications { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
