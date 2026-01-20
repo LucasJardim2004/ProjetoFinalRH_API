@@ -44,6 +44,15 @@ namespace RhManagementApi.Controllers
             return Ok(notifications);
         }
 
+        [HttpGet("recipient/{employeeId}/unread")]
+        public async Task<IActionResult> GetUnreadByRecipient(int employeeId)
+        {
+            var notifications = await db.Notifications
+                .Where(n => n.RecipientID == employeeId && !n.IsRead)
+                .ToListAsync();
+            return Ok(notifications);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(NotificationDTO notificationDTO)
         {
