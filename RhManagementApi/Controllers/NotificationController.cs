@@ -9,6 +9,8 @@ using RhManagementApi.Models;
 
 namespace RhManagementApi.Controllers
 {
+    [ApiController]
+    [Route("api/v1/[controller]")]
     public partial class NotificationController : ControllerBase
     {
         private readonly AdventureWorksContext db;
@@ -40,7 +42,7 @@ namespace RhManagementApi.Controllers
         [HttpGet("recipient/{employeeId}")]
         public async Task<IActionResult> GetByRecipient(int employeeId)
         {
-            var notifications = await db.Notifications.Where(n => n.RecipientID == employeeId).ToListAsync();
+            var notifications = await db.Notifications.Where(n => n.RecipientEmployeeId == employeeId).ToListAsync();
             return Ok(notifications);
         }
 
@@ -48,7 +50,7 @@ namespace RhManagementApi.Controllers
         public async Task<IActionResult> GetUnreadByRecipient(int employeeId)
         {
             var notifications = await db.Notifications
-                .Where(n => n.RecipientID == employeeId && !n.IsRead)
+                .Where(n => n.RecipientEmployeeId == employeeId && !n.IsRead)
                 .ToListAsync();
             return Ok(notifications);
         }
@@ -99,7 +101,7 @@ namespace RhManagementApi.Controllers
         public async Task<IActionResult> DeleteAllReadNotifications(int employeeId)
         {
             var readNotifications = await db.Notifications
-                 .Where(n => n.RecipientID == employeeId && n.IsRead)
+                 .Where(n => n.RecipientEmployeeId == employeeId && n.IsRead)
                  .ToListAsync();
 
             if (readNotifications.Count == 0) return NoContent();
