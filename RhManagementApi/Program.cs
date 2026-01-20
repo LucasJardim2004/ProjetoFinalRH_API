@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using System.Text;
+using System.Collections.ObjectModel;
+using System.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +14,7 @@ using RhManagementApi.Models;
 using RhManagementApi.Services;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.MSSqlServer;
 using Serilog.Sinks.SystemConsole.Themes;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +37,29 @@ Log.Logger = new LoggerConfiguration()
         rollOnFileSizeLimit: true,
         shared: false,
         restrictedToMinimumLevel: LogEventLevel.Information)
+    .WriteTo.MSSqlServer(
+        connectionString: builder.Configuration.GetConnectionString("AdventureWorks"),
+        sinkOptions: new MSSqlServerSinkOptions 
+        { 
+            TableName = "Logs",
+            SchemaName = "dbo",
+            AutoCreateSqlTable = true,
+            BatchPostingLimit = 100,
+            BatchPeriod = TimeSpan.FromSeconds(5)
+        },
+        columnOptions: new ColumnOptions
+        {
+            AdditionalColumns = new Collection<SqlColumn>
+            {
+                new SqlColumn 
+                { 
+                    ColumnName = "BusinessEntityId", 
+                    DataType = SqlDbType.NVarChar,
+                    DataLength = 128,
+                    AllowNull = true
+                }
+            }
+        })
     .CreateLogger();
 
 builder.Host.UseSerilog();
@@ -43,12 +69,12 @@ builder.Services.AddControllers();
 
 // AdventureWorks context
 builder.Services.AddDbContext<AdventureWorksContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks"), sql => sql.UseHierarchyId()));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks"), sql => sql.UseHierarchyId().EnableRetryOnFailure()));
 
 // Identity context (auth schema with separate migrations history)
 builder.Services.AddDbContext<AuthDbContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks"), sql =>
-        sql.MigrationsHistoryTable("__EFMigrationsHistory", "auth")));
+        sql.MigrationsHistoryTable("__EFMigrationsHistory", "auth").EnableRetryOnFailure()));
 
 builder.Services
     .AddIdentityCore<User>(options =>
@@ -166,7 +192,10 @@ app.UseSerilogRequestLogging(options =>
     options.EnrichDiagnosticContext = (diag, httpContext) =>
     {
         var query = httpContext.Request.QueryString.HasValue ? httpContext.Request.QueryString.Value : string.Empty;
+        var businessEntityId = httpContext.User?.FindFirst("business_entity_id")?.Value ?? "unknown";
+        
         diag.Set("QueryString", query);
+        diag.Set("BusinessEntityId", businessEntityId);
     };
 });
 
