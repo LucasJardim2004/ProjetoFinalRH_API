@@ -21,16 +21,52 @@ namespace RhManagementApi.Controllers
             this.db = db;
             this.mapper = mapper;
         }
- 
+
         [HttpGet]
         [Authorize(Policy = "HROnly")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] int pageNumber, [FromQuery] int pageSize, [FromQuery] string? searchTerm = null)
         {
-            var employee = await this.db.Employees
-                .Take(100)
+            // Validate pagination parameters
+            if (pageNumber < 1) pageNumber = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 100) pageSize = 100; // Limit max page size for security
+
+            // Build query with search filter
+            var query = this.db.Employees.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                var search = searchTerm.Trim().ToLower();
+                query = query.Where(e => 
+                    e.JobTitle.ToLower().Contains(search) ||
+                    e.NationalIDNumber.ToLower().Contains(search)
+                );
+            }
+
+            // Get total count for pagination metadata
+            var totalCount = await query.CountAsync();
+
+            // Get paginated employees
+            var employees = await query
+                .OrderBy(e => e.BusinessEntityID)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
+
+            // Map employees to DTOs
+            var employeeDtos = this.mapper.Map<List<EmployeeDTO>>(employees);
  
-            return Ok(employee);
+            return Ok(new
+            {
+                data = employeeDtos,
+                pagination = new
+                {
+                    totalCount = totalCount,
+                    pageNumber = pageNumber,
+                    pageSize = pageSize,
+                    totalPages = (int)Math.Ceiling(totalCount / (double)pageSize)
+                }
+            });
         }
  
  
