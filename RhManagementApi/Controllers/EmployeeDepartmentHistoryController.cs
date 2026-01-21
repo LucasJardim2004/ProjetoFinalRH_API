@@ -85,32 +85,38 @@ namespace RhManagementApi.Controllers
             return CreatedAtAction(nameof(Get), new { id = entity.BusinessEntityID }, readDto);
         }
        
+
+        // EmployeeDepartmentHistoryController.Patch
         [Authorize(Policy = "HROnly")]
         [HttpPatch("{id}_{startDate}")]
         public async Task<IActionResult> Patch(int id, DateTime startDate, EmployeeDepartmentHistoryDTO dto)
         {
             if (id != dto.BusinessEntityID) return BadRequest("ID mismatch");
- 
+
             if (dto.EndDate.HasValue)
             {
                 var endDate = dto.EndDate.Value;
                 if (endDate <= DateTime.MinValue || endDate >= DateTime.MaxValue)
                     return BadRequest("EndDate is out of range.");
             }
- 
-            // Find by date-only to avoid TZ/tick mismatches
+
+            // ✅ Provider-agnostic date-only match
+            var day = startDate.Date;
+            var next = day.AddDays(1);
+
             var edh = await db.EmployeeDepartmentHistories
                 .FirstOrDefaultAsync(e =>
                     e.BusinessEntityID == id &&
-                    EF.Functions.DateDiffDay(e.StartDate, startDate) == 0);
- 
+                    e.StartDate >= day &&
+                    e.StartDate < next);
+
             if (edh == null) return NotFound();
- 
+
             if (dto.EndDate != null)
                 edh.EndDate = dto.EndDate;
- 
+
             await db.SaveChangesAsync();
- 
+
             var result = mapper.Map<EmployeeDepartmentHistoryDTO>(edh);
             return Ok(result);
         }

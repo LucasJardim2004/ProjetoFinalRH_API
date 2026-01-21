@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RhManagementApi.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b24fdff0b49aaaf872d948bbb69a09e58a9c6bf0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3fdb84d8fc5b5ab99335e1cc2039f3eb5587b76")]
 [assembly: System.Reflection.AssemblyProductAttribute("RhManagementApi.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RhManagementApi.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
