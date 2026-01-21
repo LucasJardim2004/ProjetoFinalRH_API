@@ -151,5 +151,11 @@ public partial class AdventureWorksContext : DbContext
 
             entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
         });
+
+        
+        if (Database.ProviderName == "Microsoft.EntityFrameworkCore.InMemory")
+        {
+            modelBuilder.Entity<Employee>().Ignore(e => e.OrganizationNode);
+        }
     }
 }

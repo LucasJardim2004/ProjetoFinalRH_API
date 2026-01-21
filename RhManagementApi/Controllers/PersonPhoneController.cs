@@ -39,6 +39,15 @@ namespace RhManagementApi.Controllers
         [Authorize(Policy = "EmployeeOrHR")]
         public async Task<IActionResult> Create(PersonPhoneDTO phoneDTO)
         {
+            if (phoneDTO.BusinessEntityID == null)
+            {
+                return BadRequest("BusinessEntityID is required");
+            }
+
+            if (phoneDTO.PhoneNumber == null)
+            {
+                return BadRequest("Phone Number is required");
+            }
             var phone = this.mapper.Map<PersonPhone>(phoneDTO);
             this.db.PeoplePhones.Add(phone);
             await this.db.SaveChangesAsync();

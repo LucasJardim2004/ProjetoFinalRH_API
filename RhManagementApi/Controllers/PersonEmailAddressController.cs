@@ -39,6 +39,10 @@ namespace RhManagementApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PersonEmailAddressDTO emailAddressDTO)
         {
+            if (emailAddressDTO.EmailAddress == null)
+            {
+                return BadRequest("Email Address is required");
+            }
             var emailAddress = this.mapper.Map<PersonEmailAddress>(emailAddressDTO);
             this.db.EmailAddresses.Add(emailAddress);
             await this.db.SaveChangesAsync();

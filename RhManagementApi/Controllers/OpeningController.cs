@@ -43,6 +43,10 @@ namespace RhManagementApi.Controllers
         [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Create(OpeningDTO openingDTO)
         {
+            if (openingDTO.JobTitle == null)
+            {
+                return BadRequest("Job Title is required");
+            }
             openingDTO.DateCreated = DateTime.Now;
 
             var opening = mapper.Map<Opening>(openingDTO);
