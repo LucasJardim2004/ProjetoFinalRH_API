@@ -46,3 +46,7 @@ RhManagementApi/obj/Debug/net9.0/RhManagementApi.csproj.AssemblyReference.cache
 RhManagementApi/obj/Debug/net9.0/RhManagementApi.assets.cache
 RhManagementApi/obj/Debug/net9.0/RhManagementApi.AssemblyInfoInputs.cache
 RhManagementApi/obj/Debug/net9.0/RhManagementApi.AssemblyInfo.cs
+*.dll
+*.dll
+*.exe
+*.pdb
