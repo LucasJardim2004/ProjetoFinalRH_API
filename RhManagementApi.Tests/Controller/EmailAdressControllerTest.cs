@@ -229,8 +229,6 @@ public class EmailAddressControllerTest
         var fromDb = await context.EmailAddresses.FindAsync(1,1);
         Assert.Equal("new@email.com", fromDb.EmailAddress);
     }
-
-
     
     [Fact]
     public async Task PersonEmailAddressController_Patch_IdMismatch_ReturnsBadRequest()
