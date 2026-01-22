@@ -39,10 +39,21 @@ namespace RhManagementApi.Controllers
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 var search = searchTerm.Trim().ToLower();
-                query = query.Where(e => 
-                    e.JobTitle.ToLower().Contains(search) ||
-                    e.NationalIDNumber.ToLower().Contains(search)
-                );
+
+                // Try numeric search
+                if (int.TryParse(searchTerm, out var empId))
+                {
+                    query = query.Where(e =>
+                        e.BusinessEntityID == empId ||
+                        e.JobTitle.ToLower().Contains(search)
+                    );
+                }
+                else
+                {
+                    query = query.Where(e =>
+                        e.JobTitle.ToLower().Contains(search)
+                    );
+                }
             }
 
             // Get total count for pagination metadata
