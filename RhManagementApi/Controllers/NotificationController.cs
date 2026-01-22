@@ -30,7 +30,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(Guid id)
         {
             var notification = await db.Notifications.FirstOrDefaultAsync(n => n.NotificationID == id);
             if (notification == null) return NotFound();
@@ -71,7 +71,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpPatch("{id}/mark-read")]
-        public async Task<IActionResult> MarkAsRead(int id)
+        public async Task<IActionResult> MarkAsRead(Guid id)
         {
             var notification = await db.Notifications.FirstOrDefaultAsync(n => n.NotificationID == id);
             if (notification == null) return NotFound();
@@ -86,7 +86,7 @@ namespace RhManagementApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var notification = await db.Notifications.FirstOrDefaultAsync(n => n.NotificationID == id);
             if (notification == null) return NotFound();

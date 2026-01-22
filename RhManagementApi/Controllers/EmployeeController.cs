@@ -15,10 +15,12 @@ namespace RhManagementApi.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly AdventureWorksContext db;
+        private readonly AuthDbContext authDb;
         private readonly IMapper mapper;
-        public EmployeeController(AdventureWorksContext db, IMapper mapper)
+        public EmployeeController(AdventureWorksContext db, AuthDbContext authDb, IMapper mapper)
         {
             this.db = db;
+            this.authDb = authDb;
             this.mapper = mapper;
         }
 
@@ -121,7 +123,32 @@ namespace RhManagementApi.Controllers
                 FirstName = person?.FirstName,
                 LastName = person?.LastName
             });
- 
+        }
+
+        [HttpGet("role/hr")]
+        // [Authorize(Policy = "EmployeeOrHR")]
+        public async Task<IActionResult> GetHR()
+        {
+            // Get all BusinessEntityIDs of users with HR role
+            var hrEmployeeIds = await authDb.UserRoles
+                .Join(
+                    authDb.Roles,
+                    ur => ur.RoleId,
+                    r => r.Id,
+                    (ur, r) => new { ur.UserId, r.Name }
+                )
+                .Where(x => x.Name == RoleNames.HR)
+                .Join(
+                    authDb.Users,
+                    x => x.UserId,
+                    u => u.Id,
+                    (x, u) => u.BusinessEntityID
+                )
+                .Where(beId => beId.HasValue)
+                .Select(beId => beId.Value)
+                .ToListAsync();
+
+            return Ok(hrEmployeeIds);
         }
  
         [HttpPost]

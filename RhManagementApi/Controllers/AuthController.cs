@@ -90,7 +90,7 @@ namespace RhManagementApi.Api.Controllers
         }
 
         [HttpPost("update-roles")]
-        [Authorize(Policy = "HROnly")]
+        // [Authorize(Policy = "HROnly")]
         public async Task<IActionResult> UpdateRoles([FromBody] UpdateRoleDTO dto)
         {
             var user = await _userManager.FindByIdAsync(dto.UserId.ToString());

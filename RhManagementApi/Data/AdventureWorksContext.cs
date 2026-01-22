@@ -144,6 +144,16 @@ public partial class AdventureWorksContext : DbContext
             entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
         });
 
+        modelBuilder.Entity<Notification>(entity =>
+        {
+            entity.ToTable("Notifications", "dbo");
+
+            entity.HasKey(e => e.NotificationID);
+
+            entity.Property(e => e.NotificationID)
+                  .HasDefaultValueSql("NEWID()");
+        });
+
         
         if (Database.ProviderName == "Microsoft.EntityFrameworkCore.InMemory")
         {
