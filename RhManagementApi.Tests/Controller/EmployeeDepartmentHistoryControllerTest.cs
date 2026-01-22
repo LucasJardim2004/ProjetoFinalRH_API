@@ -1,3 +1,4 @@
+
 using Xunit;
 using FakeItEasy;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+#pragma warning disable
 
 public class EmployeeDepartmentHistoryControllerTests
 {
@@ -46,13 +49,13 @@ public class EmployeeDepartmentHistoryControllerTests
             DepartmentID = deptId,
             StartDate = start,
             EndDate = end
-            // ❗ Do NOT set Department navigation in seed → avoids double tracking
         };
     }
 
     //--------------------------------------------------------------------
     // GET
     //--------------------------------------------------------------------
+
     [Fact]
     public async Task Get_ReturnsOk_WhenHistoryExists()
     {
@@ -62,13 +65,27 @@ public class EmployeeDepartmentHistoryControllerTests
         db.Departments.Add(dept);
 
         var start = new DateTime(2024, 1, 1);
-
         var edh = MakeEDH(15, 5, start);
-        db.EmployeeDepartmentHistories.Add(edh);
 
+        db.EmployeeDepartmentHistories.Add(edh);
         await db.SaveChangesAsync();
 
         var mapper = FakeMapper();
+
+        // Fake mapper for GET -> DTO
+        A.CallTo(() => mapper.Map<EmployeeDepartmentHistoryDTO>(A<EmployeeDepartmentHistory>._))
+            .ReturnsLazily(call =>
+            {
+                var e = call.GetArgument<EmployeeDepartmentHistory>(0);
+                return new EmployeeDepartmentHistoryDTO
+                {
+                    BusinessEntityID = e.BusinessEntityID,
+                    DepartmentID = e.DepartmentID,
+                    StartDate = e.StartDate,
+                    EndDate = e.EndDate
+                };
+            });
+
         var controller = new EmployeeDepartmentHistoryController(db, mapper);
 
         var result = await controller.Get(15);
@@ -96,13 +113,14 @@ public class EmployeeDepartmentHistoryControllerTests
     //--------------------------------------------------------------------
     // CREATE
     //--------------------------------------------------------------------
+
     [Fact]
     public async Task Create_ReturnsCreated()
     {
         await using var db = BuildContext();
 
-        var dept = MakeDepartment(5);
-        db.Departments.Add(dept);
+        // Seed department
+        db.Departments.Add(MakeDepartment(5));
         await db.SaveChangesAsync();
 
         var mapper = FakeMapper();
@@ -114,13 +132,33 @@ public class EmployeeDepartmentHistoryControllerTests
             StartDate = new DateTime(2024, 1, 1)
         };
 
-        var entity = MakeEDH(20, 5, dto.StartDate.Value);
+        // Fake Map<TEntity>
+        A.CallTo(() => mapper.Map<EmployeeDepartmentHistory>(A<EmployeeDepartmentHistory>._))
+            .ReturnsLazily(call =>
+            {
+                var d = call.GetArgument<EmployeeDepartmentHistory>(0);
+                return new EmployeeDepartmentHistory
+                {
+                    BusinessEntityID = d.BusinessEntityID,
+                    DepartmentID = d.DepartmentID,
+                    StartDate = d.StartDate,
+                    EndDate = d.EndDate
+                };
+            });
 
-        A.CallTo(() => mapper.Map<EmployeeDepartmentHistory>(dto))
-            .Returns(entity);
-
-        A.CallTo(() => mapper.Map<EmployeeDepartmentHistoryDTO>(entity))
-            .Returns(dto);
+        // Fake Map<DTO>
+        A.CallTo(() => mapper.Map<EmployeeDepartmentHistoryDTO>(A<EmployeeDepartmentHistory>._))
+            .ReturnsLazily(call =>
+            {
+                var e = call.GetArgument<EmployeeDepartmentHistory>(0);
+                return new EmployeeDepartmentHistoryDTO
+                {
+                    BusinessEntityID = e.BusinessEntityID,
+                    DepartmentID = e.DepartmentID,
+                    StartDate = e.StartDate,
+                    EndDate = e.EndDate
+                };
+            });
 
         var controller = new EmployeeDepartmentHistoryController(db, mapper);
 
@@ -156,6 +194,7 @@ public class EmployeeDepartmentHistoryControllerTests
     {
         await using var db = BuildContext();
         var mapper = FakeMapper();
+
         var controller = new EmployeeDepartmentHistoryController(db, mapper);
 
         var dto = new EmployeeDepartmentHistoryDTO
@@ -199,24 +238,27 @@ public class EmployeeDepartmentHistoryControllerTests
     {
         await using var db = BuildContext();
 
-        var dept = MakeDepartment(3);
-        db.Departments.Add(dept);
+        db.Departments.Add(MakeDepartment(3));
 
         var start = new DateTime(2024, 1, 1);
-
         var edh = MakeEDH(50, 3, start);
+
         db.EmployeeDepartmentHistories.Add(edh);
         await db.SaveChangesAsync();
 
         var mapper = FakeMapper();
 
-        A.CallTo(() => mapper.Map<EmployeeDepartmentHistoryDTO>(edh))
-            .Returns(new EmployeeDepartmentHistoryDTO
+        A.CallTo(() => mapper.Map<EmployeeDepartmentHistoryDTO>(A<EmployeeDepartmentHistory>._))
+            .ReturnsLazily(call =>
             {
-                BusinessEntityID = 50,
-                DepartmentID = 3,
-                StartDate = start,
-                EndDate = new DateTime(2025, 1, 1)
+                var e = call.GetArgument<EmployeeDepartmentHistory>(0);
+                return new EmployeeDepartmentHistoryDTO
+                {
+                    BusinessEntityID = e.BusinessEntityID,
+                    DepartmentID = e.DepartmentID,
+                    StartDate = e.StartDate,
+                    EndDate = e.EndDate
+                };
             });
 
         var controller = new EmployeeDepartmentHistoryController(db, mapper);
@@ -240,6 +282,7 @@ public class EmployeeDepartmentHistoryControllerTests
     {
         await using var db = BuildContext();
         var mapper = FakeMapper();
+
         var controller = new EmployeeDepartmentHistoryController(db, mapper);
 
         var dto = new EmployeeDepartmentHistoryDTO
@@ -258,6 +301,7 @@ public class EmployeeDepartmentHistoryControllerTests
     {
         await using var db = BuildContext();
         var mapper = FakeMapper();
+
         var controller = new EmployeeDepartmentHistoryController(db, mapper);
 
         var dto = new EmployeeDepartmentHistoryDTO
@@ -276,6 +320,7 @@ public class EmployeeDepartmentHistoryControllerTests
     {
         await using var db = BuildContext();
         var mapper = FakeMapper();
+
         var controller = new EmployeeDepartmentHistoryController(db, mapper);
 
         var dto = new EmployeeDepartmentHistoryDTO
