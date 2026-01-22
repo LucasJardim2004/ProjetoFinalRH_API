@@ -117,8 +117,26 @@ public partial class AdventureWorksContext : DbContext
 
             entity.HasKey(e => e.BusinessEntityID);
 
-            entity.Property(e => e.BusinessEntityID).ValueGeneratedNever();
+            entity.Property(e => e.BusinessEntityID)
+                .ValueGeneratedNever();
+
+            entity.Property(e => e.NameStyle)
+                .HasDefaultValue(false)
+                .IsRequired();
+
+            entity.Property(e => e.EmailPromotion)
+                .HasDefaultValue(0)
+                .IsRequired();
+
+            entity.Property(e => e.rowguid)
+                .HasDefaultValueSql("NEWID()")
+                .IsRequired();
+
+            entity.Property(e => e.ModifiedDate)
+                .HasDefaultValueSql("GETDATE()")
+                .IsRequired();
         });
+
 
         modelBuilder.Entity<PersonEmailAddress>(entity =>
         {

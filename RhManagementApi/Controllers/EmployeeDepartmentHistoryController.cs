@@ -74,7 +74,13 @@ namespace RhManagementApi.Controllers
                 return BadRequest("StartDate is out of range.");
  
             // Map and enforce StartDate/EndDate explicitly
-            var entity = this.mapper.Map<EmployeeDepartmentHistory>(dto);
+            var entity = new EmployeeDepartmentHistory
+            {
+                BusinessEntityID = dto.BusinessEntityID.Value,
+                DepartmentID     = dto.DepartmentID.Value,
+                StartDate        = start,
+                EndDate          = dto.EndDate
+            };
             entity.StartDate = start;
             if (!dto.EndDate.HasValue) entity.EndDate = null; // Explicitly null is fine
  
@@ -85,13 +91,12 @@ namespace RhManagementApi.Controllers
             return CreatedAtAction(nameof(Get), new { id = entity.BusinessEntityID }, readDto);
         }
        
-
-        // EmployeeDepartmentHistoryController.Patch
         [Authorize(Policy = "HROnly")]
         [HttpPatch("{id}_{startDate}")]
         public async Task<IActionResult> Patch(int id, DateTime startDate, EmployeeDepartmentHistoryDTO dto)
         {
-            if (id != dto.BusinessEntityID) return BadRequest("ID mismatch");
+            if (id != dto.BusinessEntityID)
+                return BadRequest("ID mismatch");
 
             if (dto.EndDate.HasValue)
             {
@@ -100,17 +105,15 @@ namespace RhManagementApi.Controllers
                     return BadRequest("EndDate is out of range.");
             }
 
-            // ✅ Provider-agnostic date-only match
-            var day = startDate.Date;
-            var next = day.AddDays(1);
+            var target = startDate.Date;
 
             var edh = await db.EmployeeDepartmentHistories
                 .FirstOrDefaultAsync(e =>
                     e.BusinessEntityID == id &&
-                    e.StartDate >= day &&
-                    e.StartDate < next);
+                    e.StartDate.Date == target);
 
-            if (edh == null) return NotFound();
+            if (edh == null)
+                return NotFound();
 
             if (dto.EndDate != null)
                 edh.EndDate = dto.EndDate;

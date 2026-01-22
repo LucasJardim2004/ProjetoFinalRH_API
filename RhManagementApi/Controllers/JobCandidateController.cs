@@ -47,7 +47,7 @@ namespace RhManagementApi.Controllers
             return Ok(candidateDTO);
         }
 
-        [Authorize(Policy = "HROnly")]
+        //[Authorize(Policy = "HROnly")]
         [HttpPost]
         public async Task<IActionResult> Create(JobCandidateDTO candidateDTO)
         {
@@ -90,7 +90,7 @@ namespace RhManagementApi.Controllers
             return NoContent();
         }
 
-        [Authorize(Policy = "HROnly")]
+        //[Authorize(Policy = "HROnly")]
         [HttpPost("upload-cv/{jobCandidateID}")]
         public async Task<IActionResult> UploadCv(int jobCandidateID, [FromForm] IFormFile file)
         {

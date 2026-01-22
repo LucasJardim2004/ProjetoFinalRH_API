@@ -26,6 +26,6 @@ namespace RhManagementApi.DTOs
 
         //public virtual Department? Department { get; set; }
 
-        public string DepartmentName { get; set; }
+        public string? DepartmentName { get; set; }
     }
 }

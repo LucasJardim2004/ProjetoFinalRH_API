@@ -200,5 +200,12 @@ namespace RhManagementApi.Api.Controllers
             });
             await _authDb.SaveChangesAsync();
         }
+        
+        [HttpGet("exists")]
+        public async Task<IActionResult> Exists([FromQuery] string email)
+        {
+            var exists = await _userManager.FindByEmailAsync(email) != null;
+            return Ok(new { exists });
+        }
     }
 }

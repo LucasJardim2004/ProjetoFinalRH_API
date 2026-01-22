@@ -61,7 +61,7 @@ namespace RhManagementApi.Controllers
         }
  
         [HttpPost]
-        [Authorize(Policy = "HROnly")]
+        //[Authorize(Policy = "HROnly")]
         public async Task<IActionResult> Create(CandidateInfoDTO candidateDTO)
         {
             if (candidateDTO.BirthDate.HasValue)
@@ -117,7 +117,7 @@ namespace RhManagementApi.Controllers
             return Ok(this.mapper.Map<CandidateInfoDTO>(candidate));
         }
  
- [Authorize(Policy = "HROnly")]
+        [Authorize(Policy = "HROnly")]
         
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete (int id)
