@@ -40,20 +40,11 @@ namespace RhManagementApi.Controllers
             {
                 var search = searchTerm.Trim().ToLower();
 
-                // Try numeric search
-                if (int.TryParse(searchTerm, out var empId))
-                {
-                    query = query.Where(e =>
-                        e.BusinessEntityID == empId ||
-                        e.JobTitle.ToLower().Contains(search)
-                    );
-                }
-                else
-                {
-                    query = query.Where(e =>
-                        e.JobTitle.ToLower().Contains(search)
-                    );
-                }
+                // Use prefix matching for ID (StartsWith) and Contains for JobTitle
+                query = query.Where(e =>
+                    e.BusinessEntityID.ToString().StartsWith(search) ||
+                    e.JobTitle.ToLower().Contains(search)
+                );
             }
 
             // Get total count for pagination metadata

@@ -41,6 +41,9 @@ namespace RhManagementApi.Controllers
             if(employeePayHistoryDTO.RateChangeDate == null)
                 employeePayHistoryDTO.RateChangeDate = DateTime.Now;
 
+            if(employeePayHistoryDTO.Rate <= 0)
+                return BadRequest("Rate must be greater than 0");
+
             var employeePayHistory = this.mapper.Map<EmployeePayHistory>(employeePayHistoryDTO);
             this.db.EmployeePayHistories.Add(employeePayHistory);
             await this.db.SaveChangesAsync();

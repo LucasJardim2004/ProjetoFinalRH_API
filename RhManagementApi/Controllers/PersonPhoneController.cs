@@ -55,5 +55,22 @@ namespace RhManagementApi.Controllers
             var readPhoneDTO = this.mapper.Map<PersonPhoneDTO>(phone);
             return CreatedAtAction(nameof(Get),new {Id = phone.BusinessEntityID}, readPhoneDTO);
         }
+
+        [HttpDelete("{businessEntityId}/{phoneNumber}/{phoneNumberTypeId}")]
+        [Authorize(Policy = "EmployeeOrHR")]
+        public async Task<IActionResult> DeletePhone(int businessEntityId, string phoneNumber, int phoneNumberTypeId)
+        {
+            var phone = await this.db.PeoplePhones
+                .FirstOrDefaultAsync(e => e.BusinessEntityID == businessEntityId && 
+                                          e.PhoneNumber == phoneNumber && 
+                                          e.PhoneNumberTypeID == phoneNumberTypeId);
+            
+            if (phone == null) return NotFound();
+
+            this.db.PeoplePhones.Remove(phone);
+            await this.db.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
